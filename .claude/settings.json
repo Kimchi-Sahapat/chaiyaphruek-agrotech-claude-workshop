@@ -1,0 +1,53 @@
+﻿{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[BRAND CHECK] Writing marketing content - ensure tone matches Chaiyaphruek AgroTech brand voice: friendly, Thai-first, farmer-centric\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[LOG] Content file written - remember to tag with channel and campaign name\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[SESSION END] Marketing session complete - check KPIs and log deliverables in campaign tracker\""
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep"
+    ]
+  },
+  "env": {
+    "COMPANY": "ชัยพฤกษ์ อโกรเทค",
+    "BRAND_LANG": "th",
+    "DEFAULT_CHANNEL": "facebook",
+    "CAMPAIGN_LOG": ".claude/logs/campaigns.md"
+  }
+}
