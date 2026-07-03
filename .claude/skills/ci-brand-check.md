@@ -16,7 +16,8 @@ description: ตรวจสอบและบังคับใช้มาต�
 
 | สัญญาณ | Checklist ที่ใช้ |
 |---|---|
-| Facebook post / TikTok / LINE / Ad copy / Caption / Tagline / Email | **Part 2** (Copywriting) + Part 1 ถ้ามี design brief |
+| Facebook post / TikTok / LINE / Ad copy / Caption / Tagline / Email โปรโมชัน | **Part 2** (Copywriting) + Part 1 ถ้ามี design brief |
+| Newsletter บทความ / Email เนื้อหาการศึกษา | **Part 3** (Article) |
 | บทความ / บล็อก / เว็บไซต์ / เนื้อหาการศึกษา | **Part 3** (Article) — ห้ามใช้ Part 2 |
 | Design brief / layout direction / visual direction | **Part 1** (CI Visual) |
 | มีหลายประเภทในชิ้นเดียว | ใช้ทุก Part ที่เกี่ยวข้อง |
@@ -122,3 +123,5 @@ PASS ✅ / ต้องแก้ไข ⚠️ — [สรุป 1 ประโ�
 ```
 
 ถ้าไม่พบการละเมิด: ส่งผล "PASS ✅ — ผ่านการตรวจสอบ CI และ Copywriting ทุกข้อ"
+
+**หมายเหตุ:** กฎที่ระบุว่า "(informational — ห้าม flag ว่าเป็น violation)" ไม่ต้องรายงานในผลลัพธ์เลย — ข้ามได้ทันที ไม่ต้องใช้ token พิเศษ
