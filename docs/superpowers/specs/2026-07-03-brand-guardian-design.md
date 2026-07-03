@@ -49,6 +49,17 @@ The human entry point. Detects mode from the input and routes accordingly.
 | Brief / topic / product / channel / goal | Create Mode |
 | "Rewrite this" + existing content | Review then Rewrite |
 
+**Content type detection (within each mode):**
+
+| Signal | Checklist applied |
+|---|---|
+| Facebook post / TikTok / LINE / ad copy / caption | Part 2 (Copywriting) + Part 1 if design described |
+| Blog article / website article / educational content | Part 3 (Article) — Part 2 rules do NOT apply |
+| Design brief / layout direction / post visual | Part 1 (CI Visual) |
+| Multiple types present | All applicable parts |
+
+Article mode and Social/Ad copy mode are mutually exclusive rule sets. The agent must detect which one applies before checking and must not cross-apply rules (e.g., penalizing an article for using "เกษตรกร" instead of "คุณ").
+
 ---
 
 ## Detailed Behavior
@@ -108,6 +119,44 @@ Run Review Mode first, then apply only Critical fixes automatically. Warning-lev
 | No tech jargon (IoT, API, bandwidth, sensor calibration) in farmer-facing copy | Warning |
 | Thai-first language; English only for own-brand names (Black Panther, Lucky Group) and distributed brand names (Syngenta, BASF, BAYER, UPL, etc.) | Warning |
 | Never write Feature before Benefit | Warning |
+
+---
+
+## Article Writing Style Checklist (Part 3)
+
+For blog articles, educational content, and website posts — distinct from Social/Ad copy rules.
+
+### Structure Rules
+
+| Rule | Severity |
+|---|---|
+| Open with seasonal/contextual scene-setting ("ช่วงนี้...") before any product mention | Warning |
+| Position Chaiyapreuk Agrotech as expert advisor mid-article, not only at the end | Warning |
+| Flow: Problem → Cause → Solution → Product (educational, not promotional) | Warning |
+| Must include summary bullet section "สรุปคำแนะนำจากชัยพฤกษ์ อโกรเทค" | Critical |
+| Must include FAQ section, 8–11 questions, written as questions farmers actually search | Critical |
+| Must close with authority statement + contact block (Facebook, TikTok, LINE, tagline) | Critical |
+
+### Language Rules (Article mode)
+
+| Rule | Severity |
+|---|---|
+| Refer to readers as "เกษตรกร" / "ชาวสวน" — NOT "คุณ" (opposite of ad copy) | Warning |
+| Technical terms are permitted — but must be followed immediately by a plain-Thai explanation in the same sentence | Warning |
+| Always include regional references: จันทบุรี, ตราด, ระยอง, ภาคตะวันออก where relevant | Warning |
+| Sentences may be multi-clause using เพราะ / จึง / เนื่องจาก / อย่างไรก็ตาม — this is correct for articles | (positive rule — do not flag) |
+| Own-brand products (Black Panther, Lucky Group) must be introduced educationally as one option among alternatives — never as the sole recommendation | Critical |
+| Specific numbers required: pH values, กก./ต้น, กรัมต่อชายทรงพุ่ม, application frequency | Warning |
+| Article CTA: only one contact block at the end — no inline conversion CTAs | Warning |
+
+### What MUST NOT appear in articles (article-specific)
+
+| Rule | Severity |
+|---|---|
+| No hashtags | Warning |
+| No promotional urgency language ("วันนี้เท่านั้น!", "สุดพิเศษ!!") | Critical |
+| No emoji in body text (allowed only in contact block if brand standard permits) | Warning |
+| No ALL CAPS in body text | Warning |
 
 ---
 
