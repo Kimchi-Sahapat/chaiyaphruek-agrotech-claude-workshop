@@ -76,11 +76,18 @@ works **from inside the LINE in-app browser AND from Chrome on a real phone**, t
     { name: "ธาตุอาหารเสริม บำรุงราก", qty: 3 }
   ];
 
+  // Sample nickname + phone — in the real app these come from the two
+  // confirm-screen fields (Spec §5). Included here to test the real message
+  // format and its length against LINE's limit.
+  var nickname = "พี่สมชาย";
+  var phone = "0812345678";
+
   var lines = order.map(function (o, i) {
     return (i + 1) + ") " + o.name + " x " + o.qty;
   });
   var message =
     "🛒 รายการสั่งซื้อจากเว็บ ชัยพฤกษ์ อโกรเทค\n" +
+    "👤 " + nickname + " · 📞 " + phone + "\n" +
     lines.join("\n") +
     "\n— รบกวนยืนยันราคาและของพร้อมส่งด้วยครับ/ค่ะ";
 
@@ -175,7 +182,9 @@ option b: name+phone form → backend delivery) before building anything else.
 **Phase 1 — Ordering core (the money-maker):**
 - Product catalogue view fed by the Excel pipeline (extend existing), with `เพิ่มลงรายการ` + quantity steppers.
 - Browser-held shopping list (`รายการของฉัน`), no login.
-- Confirm screen → real `ส่งรายการทางไลน์` (built on the validated Task 1 mechanic) + `โทรสั่ง` button.
+- Confirm screen with **two fields — ชื่อเล่น + เบอร์โทร** (the only info asked, at the close) →
+  real `ส่งรายการทางไลน์` folding those fields into the message (built on the validated Task 1
+  mechanic) + `โทรสั่ง` button. Still **no backend** — data accrues in the CRM via staff logging.
 - Home page with big-button navigation; global header/footer per `design.md`.
 - Analytics events on catalogue view, add-to-list, and send taps.
 
@@ -190,6 +199,13 @@ option b: name+phone form → backend delivery) before building anything else.
 - Point the registered domain at the site; SSL.
 - Sitemap.xml, robots.txt, meta/OpenGraph, Google Search Console, basic analytics dashboard.
 - Optional (V2): LINE Login / LIFF for persistent list + name pre-fill.
+
+**Phase 4 — Membership & Loyalty (V2, its own spec + plan; see Spec §14):**
+- LINE-login (LIFF) profile page inside LINE.
+- Read per-customer confirmed spend from the **CRM** (needs Open Item F) → compute แต้ม / ยอดสะสม.
+- Stamp-card accrual + coupon/reward (ของแถม) redemption, with a small redemption ledger (the only new data).
+- Anti-abuse: points only on confirmed, paid sales.
+- *This phase gets its own brainstorming + spec before implementation — earning rules and redemption catalog are deliberately undecided.*
 
 ---
 

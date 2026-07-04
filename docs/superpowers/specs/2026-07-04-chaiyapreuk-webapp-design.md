@@ -54,9 +54,10 @@ Everything lives on **one domain** so SEO authority compounds in one place.
 | 2 | **Order routing = tap-to-send in LINE + Call button** | LINE can't silently send "as" a user; a pre-filled message the farmer taps to send is the only zero-friction path, and it lands as a real chat in LINE@. |
 | 3 | **Shopping list, no public prices** | Protects wholesale/retail price differences; keeps the advisory model; staff confirm price on LINE. |
 | 4 | **Content = topic-organized article library, articles link to products** | Reading turns into an order; doubles as the SEO/GEO surface. |
-| 5 | **No login / no personal data until the closing step; login is optional** | Lowest friction for low-tech farmers; identity comes from LINE at send time. |
+| 5 | **No login; the only personal data is ชื่อเล่น + เบอร์โทร, asked only at the closing step; login optional** | Lowest friction for low-tech farmers; phone captured at close is the identity/join key for CRM + loyalty. |
 | 6 | **Articles managed as simple files** (not an admin panel) | Nothing fragile to maintain; content person writes a file (or a Google Doc we convert). |
 | 7 | **V1 includes the FULL article library** | SEO needs volume; content migration is the long pole of V1. |
+| 8 | **Loyalty (points/ยอดสะสม/profile/games) is V2, powered by the CRM, identity via LINE login** | CRM is the source of truth for real sales; don't build a second spend database. V1 only captures the data. |
 
 ---
 
@@ -79,22 +80,29 @@ Facebook, and LINE `@cyp-agro` (per `design.md` layout rules).
 
 1. Farmer browses **สินค้า**, taps `เพิ่มลงรายการ` on items; picks quantity with simple **+ / −** buttons.
 2. Opens **รายการของฉัน**, reviews/adjusts the list (the list persists in the browser; no login needed).
-3. Taps one big green **`ส่งรายการทางไลน์`** button → **their LINE opens with the full order already
-   typed out**, addressed to `@cyp-agro` → they hit **send**.
-4. The order lands in the shop's LINE@ inbox as a **normal chat from the farmer**. Staff confirm
-   price, stock, and give advice in that chat. If the farmer wasn't already a friend, they now are —
-   **funnel done.**
-5. Directly beneath, a red **`โทรสั่ง 039-443-372`** button for anyone who prefers to call.
+3. At the confirm step, enters just **two fields — ชื่อเล่น (nickname) + เบอร์โทร (phone)**. This is
+   the *only* info asked, and *only* at the close (per Decision 5). The phone is the customer's
+   identity key: it lets staff match the order to the CRM and becomes the join key for loyalty (V2).
+4. Taps one big green **`ส่งรายการทางไลน์`** button → **their LINE opens with the full order
+   (including ชื่อเล่น + เบอร์โทร) already typed out**, addressed to `@cyp-agro` → they hit **send**.
+5. The order lands in the shop's LINE@ inbox as a **normal chat from the farmer**. Staff confirm
+   price, stock, and give advice in that chat, and log the sale in the CRM. If the farmer wasn't
+   already a friend, they now are — **funnel done.**
+6. Directly beneath the LINE button, a red **`โทรสั่ง 039-443-372`** button for anyone who prefers to call.
 
-**No login. No form. No prices to argue with.**
+**No login. Just two fields at the very end. No prices to argue with.** V1 needs **no new backend** —
+the nickname + phone ride along inside the LINE message, and customer data accrues in the existing
+**CRM** through the staff's normal order-logging workflow.
 
 **Optional login (nice-to-have, never required):** lets a returning farmer keep their list across
-devices and pre-fill their name; likely LINE Login / LIFF so it's one tap, no typing. Deferred detail.
+devices and pre-fill their name/phone; likely LINE Login / LIFF so it's one tap, no typing. This is
+the same LINE identity used by the V2 loyalty profile (see §14). Deferred detail.
 
 ### Order message format (sent to LINE@)
 A plain, readable Thai summary, e.g.:
 ```
 🛒 รายการสั่งซื้อจากเว็บ ชัยพฤกษ์ อโกรเทค
+👤 [ชื่อเล่น] · 📞 [เบอร์โทร]
 1) [ชื่อสินค้า] x 2
 2) [ชื่อสินค้า] x 1
 — รบกวนยืนยันราคาและของพร้อมส่งด้วยครับ/ค่ะ
@@ -163,7 +171,9 @@ may be summarized or chunked.)
 - Basic analytics.
 
 ### Later (V2+)
-- Optional LINE login / LIFF (persistent list, name pre-fill).
+- **Membership & Loyalty layer** (see §14): LINE-login profile page showing points/ยอดสะสม (from CRM),
+  stamp-card accrual, and coupon/reward (ของแถม) redemption.
+- Optional LINE login / LIFF (persistent list, name pre-fill) — same identity used by the loyalty profile.
 - Sub-dealer / wholesale features.
 - Richer dashboards and reporting.
 - Deeper CRM integration.
@@ -179,6 +189,7 @@ may be summarized or chunked.)
 | C | **Article inventory + format** | PM provides | How many existing articles, current format (FB posts / docs), to scope migration. |
 | D | **LINE OA deep-link verification** | Build | Confirm URL scheme, encoding, and text-length limits against live `@cyp-agro`; define fallback. |
 | E | **Product data shape** | PM/Build | Confirm the current Excel columns (name, category, image, unit) drive the catalogue + list. |
+| F | **CRM data access (V2)** | PM provides | For loyalty: how to read per-customer confirmed spend from the CRM, and the phone field used to match web customers. Only needed when V2 starts. |
 
 ---
 
@@ -200,3 +211,41 @@ Tied to `CLAUDE.md` KPIs:
 - **LINE deep-link edge cases** — device/browser variance; mitigated by fallback (Open item D).
 - **Catalogue stack unknown** — could shift build effort; resolved by repo access (Open item B).
 - **Low-tech UX drift** — every added feature risks complexity; hold the line on the UX principles.
+- **Loyalty scope creep** — points/games are a whole subsystem; kept out of V1 deliberately. Risk is
+  it pulls focus from shipping ordering. Mitigation: V1 only *captures* nickname + phone; no loyalty
+  code until V2.
+
+---
+
+## 14. Membership & Loyalty layer (V2 — designed toward, not built in V1)
+
+A profile page giving farmers points, accumulated spending (ยอดสะสม), and redeemable rewards —
+a retention engine on top of the ordering site.
+
+### Principles
+- **CRM is the source of truth.** Points and ยอดสะสม derive from **confirmed sales in the existing
+  CRM**, not from raw web orders (which are unconfirmed shopping lists). No second spend database.
+- **Identity via LINE login.** Farmers open their profile with one LINE tap — no passwords, no OTP.
+  They're already inside LINE, so this is near-zero friction.
+- **Phone is the join key.** The เบอร์โทร captured at first order (V1) links a web/LINE identity to
+  their CRM customer record. Confirmed once on first profile visit.
+
+### What the profile page shows
+- **แต้มสะสม (points)** and **ยอดสะสม (accumulated spend)** — read from the CRM.
+- **สะสมแต้ม/ดวงตรา (stamp card):** each confirmed order/spend earns stamps/points toward a reward
+  (the chosen game style — ties directly to ยอดสะสม).
+- **โค้ดแลกส่วนลด/ของแถม (coupon & reward redemption):** points redeem for coupon codes or free items
+  claimed in-store or via LINE (the second chosen game style).
+- Order history and quick re-order (nice-to-have).
+
+### Rough architecture (to be detailed in the V2 spec)
+- A small backend/API that reads per-customer spend from the CRM (Open Item F) and computes
+  points/tiers from a defined rule (e.g. 1 point per ฿X — rule TBD with PM in V2).
+- A points/redemption ledger (the one piece of genuinely new data — tracks what's been redeemed).
+- A LIFF (LINE Front-end Framework) profile page inside LINE for identity + display.
+
+### Explicitly deferred (decide in V2 design)
+- Exact points-earning rule and redemption catalog.
+- Whether stamps come per-order or per-baht.
+- Any animated minigame (not requested now; coupons + stamp card chosen).
+- Anti-abuse rules (points only on confirmed, paid sales).
