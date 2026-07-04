@@ -261,3 +261,38 @@ a retention engine on top of the ordering site.
 - Whether stamps come per-order or per-baht.
 - Any animated minigame (not requested now; coupons + stamp card chosen).
 - Anti-abuse rules (points only on confirmed, paid sales).
+
+---
+
+## 15. Unit code legend (from the POS/inventory system, 2026-07-04)
+
+Used to decode the `Unit` column into full Thai words for display to farmers.
+
+| Code | ย่อ | เต็ม (display) | English |
+|------|-----|----------------|---------|
+| กก | กก. | กิโลกรัม | kilogram |
+| กง | กง. | กล่อง | box |
+| กน | ก้อน | ก้อน | block/lump |
+| กป | กป. | กระปุก | tub/jar |
+| กร | ก.ป๋อง | กระป๋อง | can |
+| กล | กล. | แกลลอน | gallon |
+| กส | กส. | กระสอบ | sack |
+| ขด | ขด | ขด | coil |
+| ขว | ขวด | ขวด | bottle |
+| คง | ครั้ง | ครั้ง | time/round |
+| คน | คัน | คัน | unit (tools/vehicles) |
+| คร | คร | เครื่อง | machine/appliance |
+| คอ | คู่ | คู่ | pair |
+| ชด | ชุด | ชุด | set |
+| ชน | ชิ้น | ชิ้น | piece |
+| ซง | ซอง | ซอง | sachet |
+| ตว | ตัว | ตัว | piece (item) |
+| ถอ | ถุง | ถุง | bag |
+| ลอ | หลอด | หลอด | tube |
+| ลม | เล่ม | เล่ม | volume/book |
+| มด | เม็ด | เม็ด | tablet/pellet (assumed) |
+| บบ | ? | ? | **TBD — likely ใบ (rice cooker)** |
+
+**Note:** the full legend lives in the POS system; the build should ingest the complete
+`code → คำเต็ม` table from there rather than hardcoding this subset. `บบ` and any other rare codes
+resolved during data import.
