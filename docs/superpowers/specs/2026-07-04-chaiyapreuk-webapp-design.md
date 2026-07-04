@@ -50,7 +50,7 @@ Everything lives on **one domain** so SEO authority compounds in one place.
 
 | # | Decision | Rationale |
 |---|----------|-----------|
-| 1 | **Extend the existing catalogue**, one unified site, one domain | Reuse the Excel product pipeline; one SEO authority. |
+| 1 | **Build fresh** as one unified site on one domain (the prior Excel-fed catalogue was never delivered, so there is no repo to extend) | No legacy code to carry; pick a clean SEO-friendly stack; one SEO authority. |
 | 2 | **Order routing = tap-to-send in LINE + Call button** | LINE can't silently send "as" a user; a pre-filled message the farmer taps to send is the only zero-friction path, and it lands as a real chat in LINE@. |
 | 3 | **Shopping list, no public prices** | Protects wholesale/retail price differences; keeps the advisory model; staff confirm price on LINE. |
 | 4 | **Content = topic-organized article library, articles link to products** | Reading turns into an order; doubles as the SEO/GEO surface. |
@@ -148,6 +148,14 @@ may be summarized or chunked.)
   the **product-code prefix** (first 3 digits — see §9).
 - **Best-sellers & sales data:** the CRM's per-SKU sales figures are used **only privately** to rank
   ขายดี. Sales ฿ figures are **never shown on the public site.**
+- **Price tiers are internal-only (SECURITY).** The POS holds multiple price columns —
+  `ราคา 1` ปลีก (retail), `ราคา 3` ส่ง/ซาปั๊ว (wholesale), `ราคา 4` ต้นทุน+ขนส่ง (cost+freight),
+  `ราคา 5` ทุนสุทธิ (net cost) [`ราคา 2` unspecified]. Columns 4–5 are **margins** — a leak would
+  expose the cost structure. **Requirement:** the public feed ships **only `Code / Name / Unit`
+  (+ optional availability)**; every price column and ฿ figure is **stripped at the source/build
+  step**, never sent to the browser and never in page HTML/JSON.
+- **Stock (`ยอดคงเหลือ`)** = quantity on hand in the small unit. Not shown as a raw number; used
+  (if reliable) to show a simple availability state or hide sold-out items — see §16.
 - **Articles:** **simple files** — the content person writes each article as a file (or a Google Doc
   we convert), and it publishes. No admin panel to maintain or break.
 
@@ -197,7 +205,7 @@ may be summarized or chunked.)
 | ID | Item | Owner | Notes |
 |----|------|-------|-------|
 | A | **Domain registration** | Claude guides PM | PM has none; walk through choosing + registering (~฿300–500/yr) so SEO compounds on one domain. |
-| B | **Catalogue repo access + stack** | PM provides | Needed before implementation; determines extend vs. lightweight rebuild of the product view. |
+| B | ~~Catalogue repo access~~ → **RESOLVED: no repo exists; building fresh.** | Claude picks stack | Recommended stack: **Next.js** (SSR/SSG for SEO, handles the interactive shopping list, and scales to the V2 LINE-login loyalty app; free hosting to start). No longer a blocker. |
 | C | **Article inventory + format** | PM provides | How many existing articles, current format (FB posts / docs), to scope migration. |
 | D | **LINE OA deep-link verification** | Build | Confirm URL scheme, encoding, and text-length limits against live `@cyp-agro`; define fallback. |
 | E | **Product data shape** | ✅ received (SKU PDF 2026-07-04) | Columns: No, Product code, Product Name, Unit. Category from code prefix. Still to confirm: **unit-code legend** (ถอ, กง, กป, บบ, กร), whether Excel has **image/stock** columns, and whether the live source is Excel or an export. |
@@ -296,3 +304,15 @@ Used to decode the `Unit` column into full Thai words for display to farmers.
 **Note:** the full legend lives in the POS system; the build should ingest the complete
 `code → คำเต็ม` table from there rather than hardcoding this subset. `บบ` and any other rare codes
 resolved during data import.
+
+---
+
+## 16. Stock availability (`ยอดคงเหลือ`)
+
+The POS holds on-hand quantity in the small unit. Exact counts are **not** shown to farmers.
+Recommended handling (to confirm — depends on how real-time/reliable the POS export is):
+- If stock is reliable: show a simple state — **มีของ / ใกล้หมด / หมด** — and optionally hide หมด items.
+- If stock is not reliable / not exported often: **ignore it in V1**; staff confirm availability on LINE
+  anyway (the advisory model already covers this).
+
+Decision pending PM input on export reliability. Either way, raw stock numbers stay internal.

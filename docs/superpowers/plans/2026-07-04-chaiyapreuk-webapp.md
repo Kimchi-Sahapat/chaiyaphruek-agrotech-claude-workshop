@@ -6,7 +6,10 @@
 
 **Architecture:** One domain, server-rendered pages for crawlability. A stateless "shopping list" held in the browser (no login) that compiles into a pre-filled LINE message via LINE's OA deep-link URL scheme, with a phone-call fallback. Articles are simple content files rendered to SEO/GEO-structured pages that link to related products.
 
-**Tech Stack:** Phase 0 spike is plain static HTML/JS (no dependencies). The full-site stack is **to be confirmed against the catalogue repo** (Open Item B); recommended default if a fresh SSR/SSG base is needed: **Astro** (content-first, minimal JS for slow rural data, excellent SEO) or **Next.js** if the catalogue is already React.
+**Tech Stack:** Phase 0 spike is plain static HTML/JS (no dependencies). No prior catalogue repo exists,
+so the site is **built fresh in Next.js** — SSR/SSG for SEO/GEO, handles the interactive shopping list,
+scales to the V2 LINE-login loyalty app, and hosts free to start (e.g. Vercel). Astro is the lean
+fallback if we later decide the app is content-only.
 
 **Spec:** `docs/superpowers/specs/2026-07-04-chaiyapreuk-webapp-design.md`
 
@@ -18,7 +21,7 @@ These unblock Phases 1+. Phase 0 does **not** depend on them and can start immed
 
 | ID | What | Who | Why it blocks |
 |----|------|-----|---------------|
-| B | **Catalogue repo access + its tech stack** | PM → Claude | Can't write exact file paths / extend code we can't see. Determines "extend" vs. "lightweight SSR rebuild of the product view." |
+| B | ~~Catalogue repo~~ **RESOLVED — none exists; building fresh in Next.js.** | Claude | No longer a blocker. Phase 1 can be detailed and started once product data is in a usable export. |
 | C | **Article inventory + current format** | PM → Claude | Number of articles + format (FB posts / Google Docs / Word) scopes the migration and the content-file schema. |
 | E | **Excel product columns** | PM → Claude | Confirm columns (name, category, image URL, unit, id) that drive catalogue + shopping list. |
 | A | **Domain name** (see Task 2) | PM, Claude guides | Everything ships under one domain for SEO. |
@@ -165,7 +168,8 @@ option b: name+phone form → backend delivery) before building anything else.
 
 **Owner:** PM provides; Claude organizes.
 
-- [ ] **Step 1:** Share the **catalogue repo** (zip or path/link) + note how it's currently run/hosted (Open Item B).
+- [ ] **Step 1:** Export the **product data from the POS** to Excel/CSV (Code, Name, Unit — prices/stock
+  stay internal; the build strips them) so Phase 1 has real data to render. No catalogue repo needed.
 - [ ] **Step 2:** Export or list the **Excel product columns** and share a sample sheet (Open Item E).
 - [ ] **Step 3:** Provide the **article inventory** — a list/folder of existing articles and their format (Open Item C).
 - [ ] **Step 4:** Confirm the **article topic buckets** (Spec §6 guessed ทุเรียน / โรค-แมลง / บำรุงดิน / ตามฤดูกาล).
