@@ -181,6 +181,9 @@ option b: name+phone form → backend delivery) before building anything else.
 
 **Phase 1 — Ordering core (the money-maker):**
 - Product catalogue view fed by the Excel pipeline (extend existing), with `เพิ่มลงรายการ` + quantity steppers.
+  Data model: `No, Product code, Product Name, Unit`; **category derived from code prefix**; **unit codes
+  decoded** to full Thai; **best-sellers ranked from CRM sales privately** (sales ฿ never shipped to the
+  client). Navigation = ขายดี + category browse + search.
 - Browser-held shopping list (`รายการของฉัน`), no login.
 - Confirm screen with **two fields — ชื่อเล่น + เบอร์โทร** (the only info asked, at the close) →
   real `ส่งรายการทางไลน์` folding those fields into the message (built on the validated Task 1

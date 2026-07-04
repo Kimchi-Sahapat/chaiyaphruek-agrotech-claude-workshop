@@ -65,7 +65,9 @@ Everything lives on **one domain** so SEO authority compounds in one place.
 
 - **หน้าแรก (Home)** — warm, minimal, big buttons: `ดูสินค้า / สั่งของ`, `อ่านความรู้`,
   `โทรหาเรา`, `แชทไลน์`.
-- **สินค้า (Catalogue)** — products by category; each has `เพิ่มลงรายการ` (add to list). **No prices.**
+- **สินค้า (Catalogue)** — three ways in for several-hundred SKUs: **ขายดี (best-sellers,** auto-ranked
+  from CRM sales), **browse by category** (derived from the product-code prefix), and a **search box**.
+  Each product has `เพิ่มลงรายการ` (add to list). **No prices.**
 - **รายการของฉัน (My List)** — the built shopping list → confirm → **ส่งรายการทางไลน์** or **โทรสั่ง**.
 - **ความรู้ (Learning)** — full article library, grouped by topic; each article links to related products.
 - **เกี่ยวกับเรา (About)** — the 50-year story (copy already exists in `briefs/company-history.md`); trust + SEO.
@@ -140,7 +142,12 @@ may be summarized or chunked.)
 ## 8. Maintenance
 
 - **Products:** keep pulling from **Excel**, exactly as the current catalogue does. Team edits a
-  spreadsheet; the site reflects it. No workflow change.
+  spreadsheet; the site reflects it. No workflow change. Known columns: `No`, `Product code`,
+  `Product Name`, `Unit`. **Unit codes are abbreviated** (กส, ขว, กล, ซง, ถอ, กง, กป, มด, ...) and
+  are decoded to full Thai words for display (legend to confirm with PM). Category is derived from
+  the **product-code prefix** (first 3 digits — see §9).
+- **Best-sellers & sales data:** the CRM's per-SKU sales figures are used **only privately** to rank
+  ขายดี. Sales ฿ figures are **never shown on the public site.**
 - **Articles:** **simple files** — the content person writes each article as a file (or a Google Doc
   we convert), and it publishes. No admin panel to maintain or break.
 
@@ -158,6 +165,11 @@ may be summarized or chunked.)
   to open the chat pre-filled. Confirm exact scheme + encoding + length limits against the live
   `@cyp-agro` account during build; provide a graceful fallback (copy-to-clipboard + open chat) if
   a device/browser doesn't honor the deep link.
+- **Category from product code:** the first 3 digits of the code map to a category, giving free
+  navigation without new data. Inferred map (**names to confirm with PM**):
+  `001` ปุ๋ยเคมีเม็ด · `002` ปุ๋ยอินทรีย์/ปรับดิน · `003` ปุ๋ยเกล็ด/น้ำ · `004` ยาฆ่าหญ้า ·
+  `005–008` ยาฆ่าแมลง/ไร · `009` ยากันรา · `010` ธาตุอาหาร/ฮอร์โมน · `011` สารคุมการเจริญเติบโต ·
+  `012–013` สารเสริม/กำจัดหนู · `014–016` อุปกรณ์/เซฟตี้ · `019–020` เมล็ดพันธุ์/สินค้าทั่วไป.
 - **Analytics** wired from day one (page views, order-button taps, article reads).
 
 ---
@@ -188,7 +200,7 @@ may be summarized or chunked.)
 | B | **Catalogue repo access + stack** | PM provides | Needed before implementation; determines extend vs. lightweight rebuild of the product view. |
 | C | **Article inventory + format** | PM provides | How many existing articles, current format (FB posts / docs), to scope migration. |
 | D | **LINE OA deep-link verification** | Build | Confirm URL scheme, encoding, and text-length limits against live `@cyp-agro`; define fallback. |
-| E | **Product data shape** | PM/Build | Confirm the current Excel columns (name, category, image, unit) drive the catalogue + list. |
+| E | **Product data shape** | ✅ received (SKU PDF 2026-07-04) | Columns: No, Product code, Product Name, Unit. Category from code prefix. Still to confirm: **unit-code legend** (ถอ, กง, กป, บบ, กร), whether Excel has **image/stock** columns, and whether the live source is Excel or an export. |
 | F | **CRM data access (V2)** | PM provides | For loyalty: how to read per-customer confirmed spend from the CRM, and the phone field used to match web customers. Only needed when V2 starts. |
 
 ---
