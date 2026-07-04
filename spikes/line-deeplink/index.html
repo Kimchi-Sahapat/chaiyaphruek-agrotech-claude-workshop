@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ทดสอบส่งออเดอร์เข้าไลน์ — ชัยพฤกษ์ อโกรเทค</title>
+<style>
+  body { font-family: sans-serif; background:#4DB748; color:#fff; margin:0; padding:24px; }
+  h1 { font-size:20px; }
+  .list { background:#fff; color:#1B3A8C; border-radius:12px; padding:16px; margin:16px 0;
+          white-space:pre-wrap; line-height:1.5; }
+  .btn { display:block; text-align:center; text-decoration:none; font-size:22px;
+         font-weight:bold; padding:18px; border-radius:14px; margin:12px 0; }
+  .line { background:#06C755; color:#fff; }
+  .call { background:#E8323C; color:#fff; }
+  small { opacity:.9; display:block; margin-top:24px; word-break:break-all; }
+</style>
+</head>
+<body>
+  <h1>ทดสอบ: ส่งรายการสั่งซื้อเข้าไลน์</h1>
+
+  <div class="list" id="summary"></div>
+
+  <a class="btn line" id="lineBtn" href="#">ส่งรายการทางไลน์</a>
+  <a class="btn call" href="tel:039443372">โทรสั่ง 039-443-372</a>
+
+  <small id="debug"></small>
+
+<script>
+  // Fake order — later this is built from the shopping list.
+  var order = [
+    { name: "ปุ๋ยเคมี สูตร 15-15-15", qty: 2 },
+    { name: "ยากำจัดเพลี้ย ABC", qty: 1 },
+    { name: "ธาตุอาหารเสริม บำรุงราก", qty: 3 }
+  ];
+
+  // Sample nickname + phone — in the real app these come from the two
+  // confirm-screen fields (Spec §5). Included here to test the real message
+  // format and its length against LINE's limit.
+  var nickname = "พี่สมชาย";
+  var phone = "0812345678";
+
+  var lines = order.map(function (o, i) {
+    return (i + 1) + ") " + o.name + " x " + o.qty;
+  });
+  var message =
+    "🛒 รายการสั่งซื้อจากเว็บ ชัยพฤกษ์ อโกรเทค\n" +
+    "👤 " + nickname + " · 📞 " + phone + "\n" +
+    lines.join("\n") +
+    "\n— รบกวนยืนยันราคาและของพร้อมส่งด้วยครับ/ค่ะ";
+
+  document.getElementById("summary").innerText = message;
+
+  // LINE OA deep link. NOTE: verify the exact scheme + OA id against the live account.
+  var OA_ID = "@cyp-agro";
+  var url = "https://line.me/R/oaMessage/" + OA_ID + "/?" + encodeURIComponent(message);
+  document.getElementById("lineBtn").setAttribute("href", url);
+
+  document.getElementById("debug").innerText =
+    "message length: " + message.length + " chars\n" + url;
+</script>
+</body>
+</html>
