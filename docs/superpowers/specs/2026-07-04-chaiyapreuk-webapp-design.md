@@ -207,7 +207,7 @@ may be summarized or chunked.)
 | A | **Domain registration** | Claude guides PM | PM has none; walk through choosing + registering (~฿300–500/yr) so SEO compounds on one domain. |
 | B | ~~Catalogue repo access~~ → **RESOLVED: no repo exists; building fresh.** | Claude picks stack | Recommended stack: **Next.js** (SSR/SSG for SEO, handles the interactive shopping list, and scales to the V2 LINE-login loyalty app; free hosting to start). No longer a blocker. |
 | C | **Article inventory + format** | PM provides | How many existing articles, current format (FB posts / docs), to scope migration. |
-| D | **LINE OA deep-link verification** | Build | Confirm URL scheme, encoding, and text-length limits against live `@cyp-agro`; define fallback. |
+| D | **LINE deep-link** — scheme verified ✅ (LINE Developers docs, 2026-07-05): `https://line.me/R/oaMessage/{%40id}/?{encodeURIComponent(text)}` is current, pre-fills text (user taps Send), handles Thai/emoji/newlines, no practical length issue. **Still to confirm:** that `@cyp-agro` is the account's **real LINE ID** (OA Manager → Account info → LINE ID) — vanity/Premium format, valid only if owned. **Test phone-only** (scheme unsupported on LINE PC → desktop = false negative). | Build/PM | `@` now encoded to `%40`. |
 | E | **Product data shape** | ✅ received (SKU PDF 2026-07-04) | Columns: No, Product code, Product Name, Unit. Category from code prefix. Still to confirm: **unit-code legend** (ถอ, กง, กป, บบ, กร), whether Excel has **image/stock** columns, and whether the live source is Excel or an export. |
 | F | **CRM data access (V2)** | PM provides | For loyalty: how to read per-customer confirmed spend from the CRM, and the phone field used to match web customers. Only needed when V2 starts. |
 

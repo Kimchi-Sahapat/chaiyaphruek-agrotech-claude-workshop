@@ -52,8 +52,10 @@
   document.getElementById("summary").innerText = message;
 
   // LINE OA deep link. NOTE: verify the exact scheme + OA id against the live account.
+  // OA_ID must be the shop's REAL LINE ID (LINE OA Manager → Account info → LINE ID).
+  // "@cyp-agro" is a vanity/Premium-ID format — valid, but only works if the account owns it.
   var OA_ID = "@cyp-agro";
-  var url = "https://line.me/R/oaMessage/" + OA_ID + "/?" + encodeURIComponent(message);
+  var url = "https://line.me/R/oaMessage/" + encodeURIComponent(OA_ID) + "/?" + encodeURIComponent(message);
   document.getElementById("lineBtn").setAttribute("href", url);
 
   document.getElementById("debug").innerText =
