@@ -51,6 +51,10 @@
   .chip.hot.on{background:var(--red); border-color:var(--red);}
 
   .count{color:var(--muted); font-size:13px; margin:6px 2px 10px;}
+  .pricenote{background:#eaf3ff; border:1px solid #cfe0ff; color:var(--navy); border-radius:12px;
+    padding:11px 13px; font-size:13.5px; font-weight:600; line-height:1.45; margin-bottom:10px;
+    display:flex; gap:8px; align-items:flex-start;}
+  .pricenote b{color:var(--red);}
 
   /* Product list */
   .plist{display:flex; flex-direction:column; gap:10px;}
@@ -137,6 +141,7 @@
   <!-- CATALOGUE -->
   <section class="scr" id="s-cat">
     <input class="search" id="q" placeholder="🔎 ค้นหาสินค้า เช่น ปุ๋ย, ออทิวา, เขาเพชร">
+    <div class="pricenote">💬<span>หน้านี้<b>ไม่แสดงราคา</b> — เลือกของที่ต้องการ แล้วส่งรายการให้ร้านเช็กราคาและของพร้อมส่งทางไลน์ได้เลยครับ</span></div>
     <div class="chips" id="chips"></div>
     <div class="count" id="count"></div>
     <div class="plist" id="plist"></div>
