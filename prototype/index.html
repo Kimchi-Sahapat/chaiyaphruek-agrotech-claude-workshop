@@ -1,0 +1,298 @@
+<style>
+  :root{
+    --green:#4DB748; --green-dk:#1E7B34; --green-dker:#155F27;
+    --navy:#1B3A8C; --red:#E8323C; --gold:#FFD700; --cream:#FFFDE0;
+    --line:#06C755; --ink:#16321a; --muted:#5b6b5d;
+    --card:#ffffff; --line-soft:#e4ede2;
+    --sans:"Segoe UI Variable","Segoe UI",system-ui,"Noto Sans Thai","Leelawadee UI",Tahoma,sans-serif;
+  }
+  /* Single-theme by brand rule (design.md: green dominant, never dark grounds). */
+  *{box-sizing:border-box;}
+  .app{font-family:var(--sans); color:var(--ink); background:#eef6ea; max-width:460px;
+    margin:0 auto; min-height:100%; position:relative; padding-bottom:88px;}
+  .app button{font-family:var(--sans);}
+
+  /* Header */
+  .hdr{background:var(--green); background-image:radial-gradient(120% 120% at 50% -20%, #63c655, var(--green));
+    padding:12px 16px; display:flex; align-items:center; gap:10px; position:sticky; top:0; z-index:20;
+    box-shadow:0 2px 10px rgba(0,0,0,.12);}
+  .badge{background:#fff; border-radius:999px; padding:6px 12px; font-weight:800; font-size:15px; box-shadow:0 2px 6px rgba(0,0,0,.15);}
+  .badge .n{color:var(--navy);} .badge .a{color:var(--red);}
+  .hdr .back{margin-left:auto; background:rgba(255,255,255,.2); border:none; color:#fff; font-weight:800;
+    border-radius:999px; padding:8px 14px; font-size:14px; cursor:pointer; display:none;}
+
+  .scr{display:none; padding:16px;} .scr.on{display:block;}
+
+  /* Home */
+  .hello{color:var(--green-dker); font-weight:800; font-size:22px; margin:8px 2px 2px; text-wrap:balance;}
+  .hello2{color:var(--muted); margin:0 2px 18px; font-size:15px;}
+  .tiles{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .tile{border:none; border-radius:18px; padding:20px 14px; text-align:left; color:#fff; cursor:pointer;
+    font-weight:800; font-size:18px; line-height:1.25; min-height:112px; display:flex; flex-direction:column;
+    justify-content:space-between; box-shadow:0 6px 16px rgba(0,0,0,.12);}
+  .tile .ic{font-size:30px;}
+  .t-shop{background:linear-gradient(150deg,#4DB748,#2f9a34);}
+  .t-learn{background:linear-gradient(150deg,#2b57c4,var(--navy));}
+  .t-call{background:linear-gradient(150deg,#f0555d,var(--red));}
+  .t-line{background:linear-gradient(150deg,#22d072,#06C755);}
+  .promo{margin-top:14px; background:var(--cream); border:2px dashed #e7cf3a; border-radius:16px;
+    padding:14px 16px; color:var(--green-dker); font-weight:700;}
+  .promo b{color:var(--red);}
+
+  /* Search + filters */
+  .search{width:100%; border:2px solid var(--line-soft); border-radius:14px; padding:14px 16px; font-size:17px;
+    background:#fff; margin-bottom:12px;}
+  .search:focus{outline:none; border-color:var(--green);}
+  .chips{display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:6px; scrollbar-width:none;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{white-space:nowrap; border:2px solid var(--line-soft); background:#fff; color:var(--ink);
+    border-radius:999px; padding:9px 15px; font-size:15px; font-weight:700; cursor:pointer;}
+  .chip.on{background:var(--green); border-color:var(--green); color:#fff;}
+  .chip.hot.on{background:var(--red); border-color:var(--red);}
+
+  .count{color:var(--muted); font-size:13px; margin:6px 2px 10px;}
+
+  /* Product list */
+  .plist{display:flex; flex-direction:column; gap:10px;}
+  .p{background:var(--card); border:1px solid var(--line-soft); border-radius:16px; padding:13px 14px;
+    display:flex; align-items:center; gap:12px;}
+  .p .thumb{width:46px; height:46px; border-radius:12px; flex:0 0 auto; display:flex; align-items:center;
+    justify-content:center; font-size:22px; color:#fff; font-weight:800;}
+  .p .info{flex:1; min-width:0;}
+  .p .nm{font-weight:700; font-size:15.5px; line-height:1.3;}
+  .p .meta{color:var(--muted); font-size:12.5px; margin-top:3px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
+  .p .hot{background:#fff0f0; color:var(--red); font-weight:800; border-radius:6px; padding:1px 7px; font-size:11.5px;}
+  .add{border:none; background:var(--green); color:#fff; font-weight:800; border-radius:12px;
+    padding:10px 14px; font-size:15px; cursor:pointer; flex:0 0 auto;}
+  .stepper{display:flex; align-items:center; gap:0; flex:0 0 auto;}
+  .stepper button{width:38px; height:38px; border:none; background:var(--green-dk); color:#fff; font-size:20px;
+    font-weight:800; cursor:pointer;}
+  .stepper button:first-child{border-radius:12px 0 0 12px;} .stepper button:last-child{border-radius:0 12px 12px 0;}
+  .stepper .q{min-width:38px; text-align:center; font-weight:800; background:#fff; align-self:stretch;
+    display:flex; align-items:center; justify-content:center; border-top:2px solid var(--green-dk); border-bottom:2px solid var(--green-dk);}
+
+  /* Cart bar */
+  .cartbar{position:fixed; left:0; right:0; bottom:0; max-width:460px; margin:0 auto; padding:12px 16px;
+    background:linear-gradient(0deg,#fff 70%,rgba(255,255,255,0)); }
+  .cartbtn{width:100%; border:none; background:var(--green); color:#fff; font-weight:800; font-size:18px;
+    border-radius:16px; padding:16px; cursor:pointer; display:flex; justify-content:center; gap:10px; align-items:center;
+    box-shadow:0 8px 20px rgba(45,140,45,.35);}
+  .cartbtn[disabled]{background:#c7d3c5; box-shadow:none; cursor:default;}
+  .cartbtn .pill{background:rgba(255,255,255,.28); border-radius:999px; padding:2px 11px; font-size:15px;}
+
+  /* List / confirm */
+  h2.t{font-size:20px; color:var(--green-dker); margin:4px 2px 14px; font-weight:800;}
+  .empty{text-align:center; color:var(--muted); padding:50px 20px; font-size:16px;}
+  .li{background:#fff; border:1px solid var(--line-soft); border-radius:14px; padding:12px 12px; margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;}
+  .li .nm{flex:1; font-weight:700; font-size:15px;}
+  .li .rm{background:none; border:none; color:var(--red); font-size:20px; cursor:pointer; padding:4px;}
+  .field{margin:14px 0;}
+  .field label{display:block; font-weight:800; color:var(--green-dker); margin-bottom:6px; font-size:15px;}
+  .field input{width:100%; border:2px solid var(--line-soft); border-radius:14px; padding:14px 16px; font-size:17px;}
+  .field input:focus{outline:none; border-color:var(--green);}
+  .sumcard{background:#fff; border:1px solid var(--line-soft); border-radius:16px; padding:14px 16px; margin-bottom:6px;}
+  .sumcard .row{display:flex; justify-content:space-between; gap:10px; padding:6px 0; font-size:15px; border-bottom:1px dashed #eee;}
+  .sumcard .row:last-child{border-bottom:none;}
+  .bigbtn{display:flex; width:100%; align-items:center; justify-content:center; gap:10px; text-decoration:none;
+    border:none; font-weight:800; font-size:19px; padding:18px; border-radius:16px; margin-top:12px; cursor:pointer; color:#fff;}
+  .b-line{background:var(--line);} .b-call{background:var(--red);}
+  .bigbtn[disabled]{background:#c7d3c5; cursor:default;}
+  .hint{color:var(--muted); font-size:13.5px; line-height:1.5; margin:14px 4px 0; text-align:center;}
+  .hint a{color:var(--navy); font-weight:700;}
+
+  /* Footer */
+  .foot{background:var(--green-dk); color:#fff; margin-top:22px; padding:16px; font-size:13px; text-align:center; line-height:1.7;}
+  .foot b{color:var(--gold);}
+  .note{background:#fff8d6; border:1px solid #ecdf9a; color:#7a6a12; font-size:12.5px; border-radius:12px;
+    padding:10px 12px; margin:0 16px 12px; line-height:1.5;}
+</style>
+
+<div class="app">
+  <div class="hdr">
+    <span class="badge"><span class="n">ชัยพฤกษ์</span> <span class="a">อโกรเทค</span></span>
+    <button class="back" id="backBtn">‹ กลับ</button>
+  </div>
+
+  <div class="note">ตัวอย่างระบบ (prototype) · สินค้า 84 รายการจากไฟล์จริง · ยังไม่มีราคาบนหน้าเว็บตามที่ตกลง</div>
+
+  <!-- HOME -->
+  <section class="scr on" id="s-home">
+    <p class="hello">สวัสดีครับ 🌿</p>
+    <p class="hello2">เลือกสินค้า สั่งของ หรือปรึกษาเรื่องสวนกับเราได้เลย</p>
+    <div class="tiles">
+      <button class="tile t-shop" onclick="go('cat')"><span class="ic">🛒</span>ดูสินค้า / สั่งของ</button>
+      <button class="tile t-learn" onclick="alert('ส่วนความรู้ — เร็วๆ นี้')"><span class="ic">📖</span>อ่านความรู้</button>
+      <a class="tile t-call" href="tel:039443372"><span class="ic">📞</span>โทรหาเรา</a>
+      <a class="tile t-line" href="https://line.me/R/ti/p/@cyp-agro"><span class="ic">💬</span>แชทไลน์ @cyp-agro</a>
+    </div>
+    <div class="promo">🎁 สมาชิกสะสมแต้ม แลกส่วนลด-ของแถม <b>เร็วๆ นี้</b></div>
+    <div class="foot">
+      🌾 ชัยพฤกษ์ อโกรเทค (ขลุง จันทบุรี)<br>
+      📞 <b>039-443-372</b> · 092-656-2944<br>
+      LINE @cyp-agro · จ–ส 07:00–17:00
+    </div>
+  </section>
+
+  <!-- CATALOGUE -->
+  <section class="scr" id="s-cat">
+    <input class="search" id="q" placeholder="🔎 ค้นหาสินค้า เช่น ปุ๋ย, ออทิวา, เขาเพชร">
+    <div class="chips" id="chips"></div>
+    <div class="count" id="count"></div>
+    <div class="plist" id="plist"></div>
+  </section>
+
+  <!-- LIST -->
+  <section class="scr" id="s-list">
+    <h2 class="t">🧺 รายการของฉัน</h2>
+    <div id="listBox"></div>
+  </section>
+
+  <!-- CONFIRM -->
+  <section class="scr" id="s-confirm">
+    <h2 class="t">✅ ยืนยันการสั่งซื้อ</h2>
+    <div class="sumcard" id="sum"></div>
+    <div class="field"><label>ชื่อเล่น</label><input id="nick" placeholder="เช่น พี่สมชาย" autocomplete="off"></div>
+    <div class="field"><label>เบอร์โทร</label><input id="phone" inputmode="tel" placeholder="08x-xxx-xxxx" autocomplete="off"></div>
+    <button class="bigbtn b-line" id="sendBtn" disabled>💬 ส่งรายการทางไลน์</button>
+    <a class="bigbtn b-call" href="tel:039443372">📞 โทรสั่ง 039-443-372</a>
+    <p class="hint">แตะ “ส่งรายการทางไลน์” แล้วกดส่งในแอปไลน์ ทางร้านจะยืนยันราคาและของให้ครับ<br>
+      ถ้าต้องการยกเลิก โทรหาเราหรือทักไลน์ <a href="https://line.me/R/ti/p/@cyp-agro">@cyp-agro</a> ได้เลย</p>
+  </section>
+
+  <!-- CART BAR -->
+  <div class="cartbar" id="cartbar" style="display:none;">
+    <button class="cartbtn" id="cartbtn" onclick="go('list')">
+      <span id="cartlabel">ดูรายการ</span><span class="pill" id="cartn">0</span>
+    </button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var UNIT={"กก":"กิโลกรัม","กง":"กล่อง","กน":"ก้อน","กป":"กระปุก","กร":"กระป๋อง","กล":"แกลลอน","กส":"กระสอบ","ขด":"ขด","ขว":"ขวด","ซง":"ซอง","ตว":"ตัว","ถอ":"ถุง","ลอ":"หลอด","ลม":"เล่ม","มด":"เม็ด","บบ":"ใบ","ชน":"ชิ้น"};
+  var GROUP={"001":"ปุ๋ย","002":"ปุ๋ย","003":"ปุ๋ย","004":"ยาฆ่าหญ้า","005":"ยาฆ่าแมลง","006":"ยาฆ่าแมลง","007":"ยาฆ่าแมลง","008":"ยาฆ่าแมลง","009":"ยากันรา","010":"อาหารเสริม-ฮอร์โมน","011":"อาหารเสริม-ฮอร์โมน","012":"อาหารเสริม-ฮอร์โมน","013":"อื่นๆ","019":"อื่นๆ","020":"อื่นๆ","014":"อุปกรณ์","015":"อุปกรณ์","016":"อุปกรณ์"};
+  var GCOLOR={"ปุ๋ย":"#8a5a2b","ยาฆ่าแมลง":"#c0392b","ยาฆ่าหญ้า":"#2f9a34","ยากันรา":"#2b57c4","อาหารเสริม-ฮอร์โมน":"#1E7B34","อุปกรณ์":"#555","อื่นๆ":"#777"};
+  // [code, name, unit, cat, best]
+  var P=[
+  ["001-3506-48-9","เรือใบไข่มุก (เม็ดฟ้า) 16-16-16","กส","001",1],["001-3506-56-9","เรือใบไข่มุก (เม็ดฟ้า) 8-24-24","กส","001",1],["001-0101-03-9","กระต่าย 16-16-16 [รัสเซีย]","กส","001",1],["001-3512-19-9","รุ่งอรุณ 20-8-20","กส","001",0],["001-3305-01-9","มายูนิคอร์น 16-16-16","กส","001",0],["001-3301-01-8","ม้าสิงห์ 12-12-17+2 (25กก)","กส","001",0],["001-3301-02-8","ม้าสิงห์ 15-5-20+2 (25กก)","กส","001",0],["001-4303-01-8","เอ็นเท็ค 20-10-10 (25กก)","กส","001",0],["001-2601-05-9","แบล็คแพนเทอร์ 8-24-24","กส","001",1],["001-2601-02-9","แบล็คแพนเทอร์ 16-16-16","กส","001",0],["001-2602-01-9","แบล็คแพนเทอร์ 9-3-3","กส","001",0],["001-3601-01-8","ลัคกี้ มาโครแคล (25กก)","กส","001",0],["001-1101-01-8","โซลแคล (25กก)","กส","001",1],
+  ["002-0205-01-9","เขาเพชร 6-3-3 (50กก)","กส","002",1],["002-0205-02-9","เขาเพชร 3-4-5 (50กก)","กส","002",1],["002-2002-01-9","โดโลไมท์ ตราน้ำพุ/ค้างคาว (50กก)","กส","002",0],["002-2603-01-8","บูลแคส [ยิปซั่ม] (25กก)","กส","002",0],["002-0201-01-9","ขี้ไก่อัดแท่ง ไก่ฟ้าทอง เม็ดเล็ก","กส","002",0],["002-2606-01-9","แบล็ค--โครฟูล","กส","002",0],["002-3631-02-9","ลัคกี้ ลีฟ (50กก)","กส","002",0],
+  ["003-4450-08-5","ไฮเพาเวอร์ 5-25-30 (4x5ลิตร)","กล","003",1],["003-4450-10-5","ไฮเพาเวอร์ 15-15-15 (4x5ลิตร)","กล","003",1],["003-4450-09-5","ไฮเพาเวอร์ 21-7-7 (4x5ลิตร)","กล","003",1],["003-3301-01-8","มามีโกร 10-52-17 (20กก)","กส","003",0],["003-2604-02-9","ไบโอเมอร์ 20-20-20 (20กกx1กส)","กส","003",0],["003-2702-04-5","ปอบทอบ 10-52-17 (20x1กก)","ถอ","003",0],["003-1003-02-5","ชาลีเฟรท 20-20-20 (25x1กก)","ถอ","003",0],
+  ["004-3501-03-6","ราวด์อั้พ (4x4ลิตร)","กล","004",1],["004-3301-01-5","มาร์เก็ต 48% ตราหมา (6x4ลิตร)","กล","004",1],["004-0102-01-5","กลูโฟสวีป (6x4ลิตร)","กล","004",0],["004-2601-01-5","บาสต้า-เอ็กซ์ (4x5ลิตร)","กล","004",0],
+  ["005-3103-01-5","ฟาสซิเนต (4x5ลิตร)","กล","005",1],["005-1101-01-2","ซูมิโซย่า (50ซองx100กรัม)","ซง","005",1],["005-3102-01-5","ฟาสต้า (6x4ลิตร)","กล","005",0],["005-3301-01-2","มอนโซ (60กล่องx50กรัม)","กง","005",0],
+  ["006-2102-01-3","โตกุไธออน (12x1ลิตร)","ขว","006",1],["006-3350-01-5","โมเดิน (4x5ลิตร)","กล","006",1],["006-3302-05-2","เอ็ม-90 (100กรัม)","ซง","006",1],["006-2701-01-5","โปรวาโด (10x1กก)","ถอ","006",1],["006-3305-01-2","โมเวนโต เอนเนอจี้ (20x500ซีซี)","ขว","006",1],["006-4324-01-5","อิมิดาโกลด์ 70 (20x1กก)","ถอ","006",0],
+  ["007-4304-01-2","เอฟโฟเรีย (24x500ซีซี)","ขว","007",1],["007-2050-02-3","เดวิส 35% (12x1ลิตร)","ขว","007",1],["007-1104-03-5","ไซเปอร์เมทริน 35% (4x5ลิตร)","กล","007",0],["007-0402-02-3","คาราเต้ซีออน 2.5% (12x1ลิตร)","ขว","007",0],
+  ["008-0404-01-2","คุโนะอิชิ (20x250ซีซี)","ขว","008",1],["008-4304-01-2","โอเบรอน (20x500ซีซี)","ขว","008",1],["008-2003-01-3","ดานิซาราบา (12x1ลิตร)","ขว","008",1],["008-0401-01-3","ไครา (12x1ลิตร)","ขว","008",0],["008-4302-03-3","โอไมท์ซุปเปอร์ 57 (12x1ลิตร)","ขว","008",0],
+  ["009-4315-01-2","ออทิวา (24x500ซีซี)","ขว","009",1],["009-3101-01-5","โฟลิอาร์ฟอส 400 (4x5ลิตร)","กล","009",1],["009-4002-01-2","สกอร์ (24x500ซีซี)","ขว","009",1],["009-4303-01-4","อาลีเอท 80 (12x1กก)","ถอ","009",1],["009-1110-01-5","ซูมิเล็กซ์ (6x1กก)","กป","009",1],["009-3708-01-3","วาเด็น (12x1ลิตร)","ขว","009",1],["009-4401-01-3","เฮดไลน์ (20x500ซีซี)","ขว","009",1],["009-4344-01-3","อาร์เทมิส (20x1ลิตร)","ขว","009",0],["009-2606-01-1","เบลคุท (20x500ซีซี)","ขว","009",0],
+  ["010-2350-01-5","เทรนเนอร์ (4x5ลิตร)","กล","010",1],["010-0152-01-5","เกตเวย์ (4x5ลิตร)","กล","010",1],["010-2603-06-3","แบล็ค--ไซโตนิน (12x1ลิตร)","ขว","010",1],["010-2603-08-5","แบล็ค--แคลโบรอน (4x5ลิตร)","กล","010",1],["010-0453-01-5","คอนเสิร์ต (4x5ลิตร)","กล","010",0],["010-3801-01-5","เศรษฐีฮอร์โมน แกลลอน (4x5ลิตร)","กล","010",0],["010-4404-05-5","ฮิวมิซิน 90% (12x1กก)","กป","010",0],
+  ["011-3001-01-3","พรีดิคท์ 25% (20x1ลิตร)","ขว","011",1],["011-4306-01-8","เอทีเอ (25กก)","กส","011",1],["011-2301-02-3","ทะวาย 25% (12x1ลิตร)","ขว","011",0],["011-4301-01-3","อโทนิค (12x1ลิตร)","ขว","011",0],["011-3301-01-2","เม็พ (12x500ซีซี)","ขว","011",0],
+  ["012-4307-01-3","แอด-ฮานซ์ (10x1ลิตร)","ขว","012",1],["012-1002-01-5","เชอออยล์ (4x5ลิตร)","กล","012",0],["012-2601-01-5","เบสมอร์ซีที (4x5ลิตร)","กล","012",0],
+  ["013-2960-02-4","ฝุ่นแดงซุปเปอร์ (45x1กก)","ถอ","013",0],["013-2002-01-5","เดทมีล (20x1กก)","ถอ","013",0],["013-2101-01-2","ไตรคลอริค (ยาฆ่าต่อ) (24x500ซีซี)","ขว","013",0],
+  ["014-1150-01-0","ไซริ้งค์ (360ตัว)","ตว","014",0],["015-4160-01-0","หน้ากาก (ฟองน้ำ)","ชน","015",0],["016-9582-10-0","หน้ากาก 3M 8210 #N95","ชน","016",0],
+  ["019-2162-02-1","แตงโมกินรี เอ็กซ์ตร้า","กร","019",0],["020-3005-03-0","พัดลมฮาตาริ 16 นิ้ว (เกอมาร์)","ตว","020",0],["020-4102-01-0","หม้อหุงข้าว อุ่นทิพย์ 1.8 ลิตร","บบ","020",0],["020-2702-01-1","ปฏิทินจีน","ลม","020",0]
+  ];
+
+  var byCode={}; P.forEach(function(p){byCode[p[0]]=p;});
+  var groups=[]; P.forEach(function(p){var g=GROUP[p[3]]; if(groups.indexOf(g)<0)groups.push(g);});
+  var cart={}; try{cart=JSON.parse(localStorage.getItem('cyp_cart')||'{}');}catch(e){cart={};}
+  var filter="ขายดี", query="";
+
+  function save(){try{localStorage.setItem('cyp_cart',JSON.stringify(cart));}catch(e){}}
+  function cartCount(){var n=0; for(var k in cart)n+=cart[k]; return n;}
+  function cartLines(){return Object.keys(cart).map(function(c){return {p:byCode[c], q:cart[c]};}).filter(function(x){return x.p&&x.q>0;});}
+
+  var $=function(id){return document.getElementById(id);};
+  function go(s){
+    ['home','cat','list','confirm'].forEach(function(k){$('s-'+k).classList.toggle('on',k===s);});
+    $('backBtn').style.display = s==='home'?'none':'block';
+    $('cartbar').style.display = (s==='cat'||s==='list')&&cartCount()>0 ? 'block':'none';
+    if(s==='list')renderList(); if(s==='confirm')renderConfirm();
+    if(s==='cat')renderCat();
+    window.scrollTo(0,0);
+  }
+  window.go=go;
+  $('backBtn').onclick=function(){var on=document.querySelector('.scr.on').id;
+    if(on==='s-confirm')go('list'); else if(on==='s-list')go('cat'); else go('home');};
+
+  function renderChips(){
+    var box=$('chips'); box.innerHTML='';
+    var mk=function(label,key,hot){var b=document.createElement('button');
+      b.className='chip'+(hot?' hot':'')+(filter===key?' on':''); b.textContent=label;
+      b.onclick=function(){filter=key; renderCat();}; box.appendChild(b);};
+    mk('⭐ ขายดี','ขายดี',true); mk('ทั้งหมด','ทั้งหมด',false);
+    groups.forEach(function(g){mk(g,g,false);});
+  }
+  function matches(p){
+    if(query){var q=query.toLowerCase(); if((p[1].toLowerCase().indexOf(q)<0)&&(p[0].indexOf(q)<0))return false;}
+    if(filter==='ทั้งหมด')return true;
+    if(filter==='ขายดี')return p[4]===1;
+    return GROUP[p[3]]===filter;
+  }
+  function renderCat(){
+    renderChips();
+    var list=P.filter(matches);
+    $('count').textContent='พบ '+list.length+' รายการ';
+    var box=$('plist'); box.innerHTML='';
+    list.forEach(function(p){
+      var g=GROUP[p[3]], q=cart[p[0]]||0;
+      var el=document.createElement('div'); el.className='p';
+      var right = q>0
+        ? '<div class="stepper"><button data-m="'+p[0]+'">−</button><div class="q">'+q+'</div><button data-p="'+p[0]+'">+</button></div>'
+        : '<button class="add" data-a="'+p[0]+'">เพิ่ม</button>';
+      el.innerHTML=''
+        +'<div class="thumb" style="background:'+GCOLOR[g]+'">'+g.charAt(0)+'</div>'
+        +'<div class="info"><div class="nm">'+p[1]+'</div>'
+        +'<div class="meta"><span>ต่อ 1 '+(UNIT[p[2]]||p[2])+'</span>'+(p[4]?'<span class="hot">⭐ ขายดี</span>':'')+'</div></div>'
+        +right;
+      box.appendChild(el);
+    });
+    box.querySelectorAll('[data-a]').forEach(function(b){b.onclick=function(){cart[b.dataset.a]=1;save();renderCat();bar();};});
+    box.querySelectorAll('[data-p]').forEach(function(b){b.onclick=function(){cart[b.dataset.p]=(cart[b.dataset.p]||0)+1;save();renderCat();bar();};});
+    box.querySelectorAll('[data-m]').forEach(function(b){b.onclick=function(){var c=b.dataset.m;cart[c]=(cart[c]||0)-1;if(cart[c]<=0)delete cart[c];save();renderCat();bar();};});
+    bar();
+  }
+  function bar(){
+    var n=cartCount();
+    $('cartbar').style.display=(n>0)?'block':'none';
+    $('cartn').textContent=n; $('cartlabel').textContent='ดูรายการของฉัน';
+  }
+  $('q').oninput=function(){query=this.value.trim();renderCat();};
+
+  function renderList(){
+    var lines=cartLines(); var box=$('listBox');
+    if(!lines.length){box.innerHTML='<div class="empty">ยังไม่มีสินค้าในรายการ<br>กด “ดูสินค้า” เพื่อเลือกได้เลย 🌿</div>'
+      +'<button class="bigbtn b-line" style="background:#4DB748" onclick="go(\'cat\')">เลือกสินค้า</button>'; return;}
+    var html='';
+    lines.forEach(function(x){
+      html+='<div class="li"><div class="nm">'+x.p[1]+'</div>'
+        +'<div class="stepper"><button data-m="'+x.p[0]+'">−</button><div class="q">'+x.q+'</div><button data-p="'+x.p[0]+'">+</button></div>'
+        +'<button class="rm" data-r="'+x.p[0]+'">🗑</button></div>';
+    });
+    html+='<button class="bigbtn b-line" style="background:#4DB748" onclick="go(\'confirm\')">ยืนยันรายการ ('+cartCount()+') →</button>';
+    box.innerHTML=html;
+    box.querySelectorAll('[data-p]').forEach(function(b){b.onclick=function(){cart[b.dataset.p]++;save();renderList();bar();};});
+    box.querySelectorAll('[data-m]').forEach(function(b){b.onclick=function(){var c=b.dataset.m;cart[c]--;if(cart[c]<=0)delete cart[c];save();renderList();bar();};});
+    box.querySelectorAll('[data-r]').forEach(function(b){b.onclick=function(){delete cart[b.dataset.r];save();renderList();bar();};});
+  }
+
+  function orderMessage(){
+    var lines=cartLines(); var nick=$('nick').value.trim(), ph=$('phone').value.trim();
+    var body=lines.map(function(x,i){return (i+1)+') '+x.p[1]+' x '+x.q+' '+(UNIT[x.p[2]]||x.p[2]);}).join('\n');
+    return '🛒 รายการสั่งซื้อจากเว็บ ชัยพฤกษ์ อโกรเทค\n👤 '+(nick||'-')+' · 📞 '+(ph||'-')+'\n'+body+'\n— รบกวนยืนยันราคาและของพร้อมส่งด้วยครับ/ค่ะ';
+  }
+  function renderConfirm(){
+    var lines=cartLines();
+    $('sum').innerHTML=lines.map(function(x){return '<div class="row"><span>'+x.p[1]+'</span><span>x '+x.q+' '+(UNIT[x.p[2]]||x.p[2])+'</span></div>';}).join('') || '<div class="empty">ไม่มีสินค้า</div>';
+    checkSend();
+  }
+  function checkSend(){
+    var ok=$('phone').value.trim().length>=8 && cartLines().length>0;
+    var b=$('sendBtn'); b.disabled=!ok;
+    if(ok){var url='https://line.me/R/oaMessage/'+encodeURIComponent('@cyp-agro')+'/?'+encodeURIComponent(orderMessage());
+      b.onclick=function(){location.href=url;};}
+  }
+  $('nick').oninput=checkSend; $('phone').oninput=checkSend;
+
+  go('home');
+})();
+</script>
