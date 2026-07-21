@@ -133,6 +133,12 @@ may be summarized or chunked.)
 - **Plain Thai**, no tech jargon; polite, friendly, close to the farmer (brand voice).
 - **Brand visuals from `design.md`**: green dominant; brand name navy `#1B3A8C` / red `#E8323C`;
   Kanit font; logo + footer contact on every page.
+- **Every page is a landing page.** Almost nobody arrives at the homepage: LINE users deep-link
+  straight to ordering/articles from the rich menu, and Google/AI users land on an article or product
+  page. So *every* page must carry the logo/identity, โทร + แชทไลน์ one tap away, a route into
+  ordering, and its own SEO metadata + NAP footer. No page may assume the user came from Home.
+- **Touch targets ≥ 44×44px**, ≥8px apart; press feedback within 150ms; visible focus rings;
+  icon-only controls need accessible labels. (Farmers, big hands, outdoors, cheap phones.)
 - **Phone and LINE always one tap away.**
 - Works on **cheap Android + slow data** (light pages, server-rendered).
 - Rule of thumb: **if a step needs explaining, it's too complex.**
@@ -166,6 +172,11 @@ may be summarized or chunked.)
 - **Server-rendered pages are required** for SEO/GEO — Google and AI crawlers must read real text,
   not a blank app that fills in later.
 - **One domain** for all pages (catalogue, articles, about) so SEO authority compounds.
+- **Real routes / deep links are REQUIRED** — every section is its own URL (`/catalogue`,
+  `/articles`, `/articles/<slug>`, `/about`, `/contact`), not JS screen-switching. Two hard reasons:
+  (1) the **LINE@ rich menu deep-links straight to ordering/articles**, bypassing Home;
+  (2) Google/AI can only rank/cite a page that has its own address. Add per-button tracking
+  parameters on rich-menu links so we can measure which entry drives orders.
 - **Extend the existing catalogue's stack** where sensible. *The catalogue codebase is not in this
   workspace* — its stack must be confirmed when the repo is provided; if it's client-rendered-only,
   we choose the lightest SEO-friendly setup and migrate the product view.

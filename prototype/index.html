@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ชัยพฤกษ์ อโกรเทค ขลุง จันทบุรี — เลือกปุ๋ย ยา เคมีเกษตร แล้วส่งรายการสั่งซื้อทางไลน์">
+<title>ชัยพฤกษ์ อโกรเทค — เลือกและสั่งซื้อปุ๋ยยา</title>
+</head>
+<body style="margin:0;background:#eef6ea">
 <style>
   :root{
     --green:#4DB748; --green-dk:#1E7B34; --green-dker:#155F27;
@@ -46,7 +55,8 @@
   .chips{display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:6px; scrollbar-width:none;}
   .chips::-webkit-scrollbar{display:none;}
   .chip{white-space:nowrap; border:2px solid var(--line-soft); background:#fff; color:var(--ink);
-    border-radius:999px; padding:9px 15px; font-size:15px; font-weight:700; cursor:pointer;}
+    border-radius:999px; padding:0 17px; min-height:44px; font-size:15px; font-weight:700; cursor:pointer;
+    transition:background .15s ease-out, border-color .15s ease-out;}
   .chip.on{background:var(--green); border-color:var(--green); color:#fff;}
   .chip.hot.on{background:var(--red); border-color:var(--red);}
 
@@ -67,12 +77,16 @@
   .p .meta{color:var(--muted); font-size:12.5px; margin-top:3px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
   .p .hot{background:#fff0f0; color:var(--red); font-weight:800; border-radius:6px; padding:1px 7px; font-size:11.5px;}
   .add{border:none; background:var(--green); color:#fff; font-weight:800; border-radius:12px;
-    padding:10px 14px; font-size:15px; cursor:pointer; flex:0 0 auto;}
+    padding:10px 16px; min-height:44px; font-size:15px; cursor:pointer; flex:0 0 auto;
+    transition:transform .15s ease-out, background .15s ease-out;}
+  .add:active{transform:scale(.96); background:var(--green-dk);}
   .stepper{display:flex; align-items:center; gap:0; flex:0 0 auto;}
-  .stepper button{width:38px; height:38px; border:none; background:var(--green-dk); color:#fff; font-size:20px;
-    font-weight:800; cursor:pointer;}
+  .stepper button{width:44px; height:44px; border:none; background:var(--green-dk); color:#fff; font-size:22px;
+    font-weight:800; cursor:pointer; transition:background .15s ease-out;}
+  .stepper button:active{background:var(--green-dker);}
   .stepper button:first-child{border-radius:12px 0 0 12px;} .stepper button:last-child{border-radius:0 12px 12px 0;}
-  .stepper .q{min-width:38px; text-align:center; font-weight:800; background:#fff; align-self:stretch;
+  .stepper .q{min-width:44px; text-align:center; font-weight:800; background:#fff; align-self:stretch;
+    font-variant-numeric:tabular-nums;
     display:flex; align-items:center; justify-content:center; border-top:2px solid var(--green-dk); border-bottom:2px solid var(--green-dk);}
 
   /* Cart bar */
@@ -90,7 +104,15 @@
   .li{background:#fff; border:1px solid var(--line-soft); border-radius:14px; padding:12px 12px; margin-bottom:10px;
     display:flex; align-items:center; gap:10px;}
   .li .nm{flex:1; font-weight:700; font-size:15px;}
-  .li .rm{background:none; border:none; color:var(--red); font-size:20px; cursor:pointer; padding:4px;}
+  .li .rm{background:none; border:none; color:var(--red); font-size:20px; cursor:pointer;
+    width:44px; height:44px; border-radius:12px; flex:0 0 auto; transition:background .15s ease-out;}
+  .li .rm:active{background:#ffecec;}
+  /* Accessibility: visible focus + no 300ms tap delay + reduced motion */
+  .app button:focus-visible, .app a:focus-visible, .app input:focus-visible{
+    outline:3px solid var(--navy); outline-offset:2px;}
+  .app button, .app a, .app input{touch-action:manipulation;}
+  .vh{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+  @media (prefers-reduced-motion:reduce){ .app *{transition:none !important; animation:none !important;} }
   .field{margin:14px 0;}
   .field label{display:block; font-weight:800; color:var(--green-dker); margin-bottom:6px; font-size:15px;}
   .field input{width:100%; border:2px solid var(--line-soft); border-radius:14px; padding:14px 16px; font-size:17px;}
@@ -113,6 +135,7 @@
 </style>
 
 <div class="app">
+  <h1 class="vh">ชัยพฤกษ์ อโกรเทค — เลือกและสั่งซื้อปุ๋ยยา</h1>
   <div class="hdr">
     <span class="badge"><span class="n">ชัยพฤกษ์</span> <span class="a">อโกรเทค</span></span>
     <button class="back" id="backBtn">‹ กลับ</button>
@@ -157,9 +180,13 @@
   <section class="scr" id="s-confirm">
     <h2 class="t">✅ ยืนยันการสั่งซื้อ</h2>
     <div class="sumcard" id="sum"></div>
-    <div class="field"><label>ชื่อเล่น</label><input id="nick" placeholder="เช่น พี่สมชาย" autocomplete="off"></div>
-    <div class="field"><label>เบอร์โทร</label><input id="phone" inputmode="tel" placeholder="08x-xxx-xxxx" autocomplete="off"></div>
+    <div class="field"><label for="nick">ชื่อเล่น</label>
+      <input id="nick" name="nick" type="text" autocomplete="name" placeholder="เช่น พี่สมชาย"></div>
+    <div class="field"><label for="phone">เบอร์โทร <span style="color:var(--red)">*</span></label>
+      <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="08x-xxx-xxxx"
+        aria-describedby="phoneHelp"></div>
     <button class="bigbtn b-line" id="sendBtn" disabled>💬 ส่งรายการทางไลน์</button>
+    <p id="phoneHelp" class="hint" aria-live="polite" style="margin-top:8px"></p>
     <a class="bigbtn b-call" href="tel:039443372">📞 โทรสั่ง 039-443-372</a>
     <p class="hint">แตะ “ส่งรายการทางไลน์” แล้วกดส่งในแอปไลน์ ทางร้านจะยืนยันราคาและของให้ครับ<br>
       ถ้าต้องการยกเลิก โทรหาเราหรือทักไลน์ <a href="https://line.me/R/ti/p/@cyp-agro">@cyp-agro</a> ได้เลย</p>
@@ -242,8 +269,10 @@
       var g=GROUP[p[3]], q=cart[p[0]]||0;
       var el=document.createElement('div'); el.className='p';
       var right = q>0
-        ? '<div class="stepper"><button data-m="'+p[0]+'">−</button><div class="q">'+q+'</div><button data-p="'+p[0]+'">+</button></div>'
-        : '<button class="add" data-a="'+p[0]+'">เพิ่ม</button>';
+        ? '<div class="stepper"><button aria-label="ลดจำนวน '+p[1]+'" data-m="'+p[0]+'">−</button>'
+          +'<div class="q" aria-live="polite">'+q+'</div>'
+          +'<button aria-label="เพิ่มจำนวน '+p[1]+'" data-p="'+p[0]+'">+</button></div>'
+        : '<button class="add" aria-label="เพิ่ม '+p[1]+' ลงรายการ" data-a="'+p[0]+'">เพิ่ม</button>';
       el.innerHTML=''
         +'<div class="thumb" style="background:'+GCOLOR[g]+'">'+g.charAt(0)+'</div>'
         +'<div class="info"><div class="nm">'+p[1]+'</div>'
@@ -270,8 +299,10 @@
     var html='';
     lines.forEach(function(x){
       html+='<div class="li"><div class="nm">'+x.p[1]+'</div>'
-        +'<div class="stepper"><button data-m="'+x.p[0]+'">−</button><div class="q">'+x.q+'</div><button data-p="'+x.p[0]+'">+</button></div>'
-        +'<button class="rm" data-r="'+x.p[0]+'">🗑</button></div>';
+        +'<div class="stepper"><button aria-label="ลดจำนวน '+x.p[1]+'" data-m="'+x.p[0]+'">−</button>'
+        +'<div class="q" aria-live="polite">'+x.q+'</div>'
+        +'<button aria-label="เพิ่มจำนวน '+x.p[1]+'" data-p="'+x.p[0]+'">+</button></div>'
+        +'<button class="rm" aria-label="ลบ '+x.p[1]+' ออกจากรายการ" data-r="'+x.p[0]+'">🗑</button></div>';
     });
     html+='<button class="bigbtn b-line" style="background:#4DB748" onclick="go(\'confirm\')">ยืนยันรายการ ('+cartCount()+') →</button>';
     box.innerHTML=html;
@@ -291,8 +322,12 @@
     checkSend();
   }
   function checkSend(){
-    var ok=$('phone').value.trim().length>=8 && cartLines().length>0;
+    var hasItems=cartLines().length>0, hasPhone=$('phone').value.trim().length>=9;
+    var ok=hasItems&&hasPhone;
     var b=$('sendBtn'); b.disabled=!ok;
+    // Tell the user WHY the button is off, instead of leaving a dead grey button.
+    $('phoneHelp').textContent = ok ? '' :
+      (!hasItems ? 'ยังไม่มีสินค้าในรายการ' : 'กรอกเบอร์โทรก่อน ถึงจะส่งรายการได้ครับ');
     if(ok){var url='https://line.me/R/oaMessage/'+encodeURIComponent('@cyp-agro')+'/?'+encodeURIComponent(orderMessage());
       b.onclick=function(){location.href=url;};}
   }
@@ -301,3 +336,6 @@
   go('home');
 })();
 </script>
+
+</body>
+</html>
