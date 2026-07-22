@@ -1053,3 +1053,52 @@ h2.t {
   font-weight: 600;
   line-height: 1.4;
 }
+
+/* Buy-participating-products button inside a campaign card */
+.buy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 14px;
+  padding: 13px;
+  border-radius: 12px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 800;
+  font-size: 15.5px;
+  min-height: 44px;
+  transition: transform 0.15s ease-out, background 0.15s ease-out;
+}
+.buy-btn:active {
+  transform: scale(0.98);
+  background: var(--green-dk);
+}
+
+/* Catalogue banner when viewing a campaign's products */
+.camp-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cream);
+  border: 1px solid #ecdf9a;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: var(--green-dker);
+}
+.camp-banner b {
+  color: var(--red);
+}
+.camp-banner .camp-clear {
+  margin-left: auto;
+  background: var(--green);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  border-radius: 999px;
+  padding: 7px 13px;
+  white-space: nowrap;
+}

@@ -18,11 +18,14 @@ const GROUP_COLOR: Record<string, string> = {
 export default function CatalogueBrowser({
   products,
   groups,
+  campaign,
 }: {
   products: Product[];
   groups: string[];
+  campaign?: string;
 }) {
-  const [filter, setFilter] = useState("ขายดี");
+  // In campaign mode, default to showing all matching items (not just best-sellers).
+  const [filter, setFilter] = useState(campaign ? "ทั้งหมด" : "ขายดี");
   const [query, setQuery] = useState("");
   const { cart, add, inc, dec } = useCart();
 
@@ -35,6 +38,21 @@ export default function CatalogueBrowser({
 
   return (
     <div className="scr">
+      {campaign && (
+        <div className="camp-banner">
+          <span>
+            🎉 สินค้าในกิจกรรม <b>{campaign}</b>
+          </span>
+          <a href="/catalogue" className="camp-clear">
+            ดูทั้งหมด
+          </a>
+        </div>
+      )}
+      {campaign && products.length === 0 && (
+        <div className="empty">
+          ยังไม่มีสินค้าตัวอย่างในกิจกรรมนี้ — เร็วๆ นี้ 🌿
+        </div>
+      )}
       <input
         className="search"
         type="search"

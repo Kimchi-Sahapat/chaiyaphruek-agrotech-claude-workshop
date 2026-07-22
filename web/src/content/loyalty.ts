@@ -1,6 +1,9 @@
-// Loyalty campaigns for the profile page.
-// NOTE: member totals here are SAMPLE values for the V1 preview. Real per-customer
+// Loyalty campaign data for the profile page.
+// NOTE: totals here are SAMPLE values for the V1 preview. Real per-customer
 // totals come from the CRM in V2.
+
+export const CAMPAIGN_NAME = "สะสมปั๊บ รับเลย";
+export const CAMPAIGN_PERIOD = "1 มิ.ย. 2569 – 31 พ.ค. 2570";
 
 export const FAMILY_MEMBERS = [
   "เอราวัณ",
@@ -15,29 +18,48 @@ export const FAMILY_MEMBERS = [
   "ลัคกี้ อะโกรเทค",
 ];
 
-export type Tier = { amount: number; reward: string };
+// Top card — combined pool (แฟมิลี + โซตัส) toward the next big reward.
+export const SUMMARY = {
+  total: 295000,
+  nextReward: "คูปองส่วนลด 10,000 บาท",
+  remaining: 35000,
+  buyTag: "family",
+};
 
-// กิจกรรมที่ 2 — สะสมปั๊บ รับเลย (ของรางวัลทันทีเมื่อถึงยอด)
-export const FAMILY_TIERS: Tier[] = [
-  { amount: 30000, reward: "พัดลม 18 นิ้ว" },
-  { amount: 120000, reward: "ตู้เย็น" },
-  { amount: 200000, reward: "คูปองส่วนลด 10,000 บาท" },
-  { amount: 300000, reward: "ทีวี 65 นิ้ว" },
-  { amount: 650000, reward: "Honda Wave" },
-  { amount: 7500000, reward: "Toyota Hilux Champ" },
+// Activities inside the campaign. Mechanic: ทุกยอดซื้อครบ step บาท รับส่วนลด per บาท.
+export type Activity = {
+  key: string;
+  name: string;
+  note: string;
+  total: number;
+  step: number;
+  per: number;
+  tag: string; // catalogue filter for participating products
+};
+
+export const ACTIVITIES: Activity[] = [
+  {
+    key: "family",
+    name: "อโกรเทค แฟมิลี ปาร์ตี้",
+    note: "นับรวมสินค้าโซตัสด้วย",
+    total: 200000,
+    step: 100000,
+    per: 6000,
+    tag: "family",
+  },
+  {
+    key: "sotus",
+    name: "โซตัสคลับ",
+    note: "เฉพาะสินค้าโซตัสเท่านั้น",
+    total: 95000,
+    step: 100000,
+    per: 6000,
+    tag: "sotus",
+  },
 ];
-
-export const CAMPAIGN_PERIOD = "1 มิ.ย. 2569 – 31 พ.ค. 2570";
-
-// SAMPLE current accumulated totals (V1 preview only)
-export const SAMPLE_FAMILY_TOTAL = 165000;
-export const SAMPLE_SOTUS_TOTAL = 620000;
-
-export const SOTUS_STEP = 1000000; // ทุก 1 ล้าน = 1 สิทธิ์ลุ้น Toyota Hilux Champ
 
 export type FlashSale = { off: string; product: string; condition: string };
 
-// 2 flash-sale deals
 export const FLASH_SALES: FlashSale[] = [
   { off: "90%", product: "อโทนิค", condition: "ซื้อ 1 ขวด" },
   {
@@ -64,12 +86,16 @@ export function baht(n: number): string {
   return n.toLocaleString("th-TH");
 }
 
-// Progress toward the next unreached tier.
-export function nextTier(total: number, tiers: Tier[]) {
-  const next = tiers.find((t) => t.amount > total);
-  const prev = [...tiers].reverse().find((t) => t.amount <= total);
-  const base = prev ? prev.amount : 0;
-  const target = next ? next.amount : tiers[tiers.length - 1].amount;
-  const pct = Math.min(100, Math.round(((total - base) / (target - base)) * 100));
-  return { next, prev, pct };
+export function summaryPct(): number {
+  const { total, remaining } = SUMMARY;
+  return Math.round((total / (total + remaining)) * 100);
+}
+
+// Discount already earned + progress toward the next discount step.
+export function activityProgress(a: Activity) {
+  const earned = Math.floor(a.total / a.step) * a.per;
+  const intoStep = a.total % a.step;
+  const remaining = intoStep === 0 ? a.step : a.step - intoStep;
+  const pct = Math.round((intoStep / a.step) * 100);
+  return { earned, remaining, pct };
 }
