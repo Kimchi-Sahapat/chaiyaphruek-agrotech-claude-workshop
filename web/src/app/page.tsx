@@ -11,7 +11,7 @@ export default function Home() {
         <Link className="tile t-shop" href="/catalogue">
           <span className="ic">🛒</span>ดูสินค้า / สั่งของ
         </Link>
-        <Link className="tile t-learn" href="/contact">
+        <Link className="tile t-learn" href="/articles">
           <span className="ic">📖</span>อ่านความรู้
         </Link>
         <a className="tile t-call" href={`tel:${SHOP.tel}`}>
