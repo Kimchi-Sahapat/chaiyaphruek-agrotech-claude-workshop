@@ -44,6 +44,12 @@ Everything lives on **one domain** so SEO authority compounds in one place.
 **Design consequence:** the experience must feel seamless whether the user arrives **from LINE** or
 **from Google**. The order flow must work in the LINE in-app browser and in a normal mobile browser.
 
+**Primary entry surface = the LINE@ rich menu** (spec'd in `briefs/line-rich-menu.md`): 6 cells —
+bottom row permanent (🛒 สั่งของ → `/catalogue` · 📞 โทร → `tel:` · 👤 เช็คยอด/โปรไฟล์ → `/profile`,
+V2), top row 3 **seasonal slots** (บทความ / สินค้าแนะนำ / โปร) rotated by durian stage. Every cell is a
+real URL with `?src=line&slot=…` tracking. The 👤 profile button needs V2 accounts — in V1 it points to
+the LINE chat.
+
 ---
 
 ## 3. Locked decisions (with rationale)
