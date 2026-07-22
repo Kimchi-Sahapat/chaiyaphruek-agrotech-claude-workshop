@@ -3,16 +3,17 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/components/CartContext";
-import { getByCode } from "@/lib/products";
+import { useProducts } from "@/components/ProductsContext";
 import { SHOP, lineOrderUrl } from "@/lib/shop";
 
 export default function ConfirmPage() {
   const { cart, ready } = useCart();
+  const { byCode } = useProducts();
   const [nick, setNick] = useState("");
   const [phone, setPhone] = useState("");
 
   const lines = Object.keys(cart)
-    .map((code) => ({ p: getByCode(code), q: cart[code] }))
+    .map((code) => ({ p: byCode[code], q: cart[code] }))
     .filter((x) => x.p && x.q > 0);
 
   const hasItems = lines.length > 0;

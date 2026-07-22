@@ -22,6 +22,10 @@ export default function Home() {
         </a>
       </div>
 
+      <Link className="bigbtn b-navy" href="/profile">
+        👤 โปรไฟล์ / สะสมแต้ม
+      </Link>
+
       <Link className="trust" href="/contact">
         อยู่กับชาวสวนจันทบุรีตั้งแต่ปี <b>2515</b> · เจ้าของมีสวนจริง — แนะนำได้จากประสบการณ์ในสวน
       </Link>

@@ -10,11 +10,14 @@ export default function Header() {
       </Link>
       <div className="actions">
         <a className="hbtn" href={`tel:${SHOP.tel}`} aria-label="โทรหาร้าน">
-          📞 โทร
+          📞
         </a>
         <a className="hbtn" href={SHOP.lineAddUrl} aria-label="แชทไลน์">
-          💬 ไลน์
+          💬
         </a>
+        <Link className="hbtn" href="/profile" aria-label="โปรไฟล์ / สะสมแต้ม">
+          👤
+        </Link>
       </div>
     </header>
   );

@@ -590,3 +590,79 @@ h2.t {
 .prose p {
   margin: 0 0 12px;
 }
+.prose b {
+  color: var(--green-dker);
+}
+
+/* Promo banner (top of every page, dismissible) */
+.promo-banner {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: linear-gradient(90deg, #ffe680, var(--gold));
+  color: #5a3d00;
+}
+.promo-banner .pb-text {
+  flex: 1;
+  padding: 11px 14px;
+  font-weight: 800;
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: #5a3d00;
+}
+.promo-banner .pb-x {
+  border: none;
+  background: rgba(0, 0, 0, 0.08);
+  color: #5a3d00;
+  font-size: 16px;
+  font-weight: 800;
+  width: 44px;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.promo-banner .pb-x:active {
+  background: rgba(0, 0, 0, 0.16);
+}
+
+/* Navy button (profile) */
+.b-navy {
+  background: var(--navy);
+}
+
+/* Header quick buttons — keep touch-sized */
+.hdr .hbtn {
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* Profile stats */
+.pf-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.pf-stat {
+  text-align: center;
+  background: var(--page);
+  border-radius: 12px;
+  padding: 14px 8px;
+}
+.pf-num {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--green-dker);
+}
+.pf-lbl {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.pf-soon {
+  text-align: center;
+  margin: 12px 0 2px;
+  font-weight: 700;
+  color: var(--red);
+  font-size: 14.5px;
+}

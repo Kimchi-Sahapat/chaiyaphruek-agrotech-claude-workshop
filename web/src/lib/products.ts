@@ -28,39 +28,41 @@ function catInfo(cat: string): { name: string; group: string } {
   return { name: "อื่นๆ", group: "อื่นๆ" };
 }
 
-const ALL: Product[] = (productsData.products as RawProduct[]).map((p) => {
-  const { name, group } = catInfo(p.cat);
-  return {
-    ...p,
-    unitFull: units[p.unit] ?? p.unit,
-    catName: name,
-    group,
-  };
-});
-
-export function getAllProducts(): Product[] {
-  return ALL;
+// Turn raw rows (from starter JSON or the live sheet) into display products.
+export function decorate(raw: RawProduct[]): Product[] {
+  return raw.map((p) => {
+    const { name, group } = catInfo(p.cat);
+    return {
+      ...p,
+      unitFull: units[p.unit] ?? p.unit,
+      catName: name,
+      group,
+    };
+  });
 }
 
-export function getByCode(code: string): Product | undefined {
-  return ALL.find((p) => p.code === code);
-}
+// Fallback dataset (bundled). Used until the live sheet is configured.
+export const STARTER: Product[] = decorate(
+  productsData.products as RawProduct[]
+);
 
-export function getGroups(): string[] {
+export function groupsOf(products: Product[]): string[] {
   const seen: string[] = [];
-  for (const p of ALL) if (!seen.includes(p.group)) seen.push(p.group);
+  for (const p of products) if (!seen.includes(p.group)) seen.push(p.group);
   return seen;
 }
 
-export function getBestsellers(): Product[] {
-  return ALL.filter((p) => p.best);
+export function byCodeMap(products: Product[]): Record<string, Product> {
+  const m: Record<string, Product> = {};
+  for (const p of products) m[p.code] = p;
+  return m;
 }
 
-// Filter used by the catalogue browser. `filter` is "ขายดี", "ทั้งหมด", or a group name.
+// Filter used by the catalogue browser. `filter` is "ขายดี", "ทั้งหมด", or a group.
 export function filterProducts(
   filter: string,
   query: string,
-  products: Product[] = ALL
+  products: Product[]
 ): Product[] {
   const q = query.trim().toLowerCase();
   return products.filter((p) => {

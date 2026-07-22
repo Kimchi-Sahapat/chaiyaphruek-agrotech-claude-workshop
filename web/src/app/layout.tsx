@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/components/CartContext";
+import { ProductsProvider } from "@/components/ProductsContext";
+import PromoBanner from "@/components/PromoBanner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SHOP } from "@/lib/shop";
+import { loadProducts } from "@/lib/products.server";
 
 export const metadata: Metadata = {
   title: {
@@ -21,18 +24,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const products = await loadProducts();
   return (
     <html lang="th">
       <body>
         <CartProvider>
-          <div className="app">
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </div>
+          <ProductsProvider products={products}>
+            <div className="app">
+              <Header />
+              <PromoBanner />
+              <main>{children}</main>
+              <Footer />
+            </div>
+          </ProductsProvider>
         </CartProvider>
       </body>
     </html>

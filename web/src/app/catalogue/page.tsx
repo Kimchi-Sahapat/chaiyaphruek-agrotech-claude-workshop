@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { getAllProducts, getGroups } from "@/lib/products";
+import { groupsOf } from "@/lib/products";
+import { loadProducts } from "@/lib/products.server";
 import CatalogueBrowser from "@/components/CatalogueBrowser";
 import CartBar from "@/components/CartBar";
 
@@ -11,9 +12,9 @@ export const metadata: Metadata = {
 
 // Server component: product data is rendered into the HTML (SEO-friendly);
 // the browser island handles search/filter/cart interactivity.
-export default function CataloguePage() {
-  const products = getAllProducts();
-  const groups = getGroups();
+export default async function CataloguePage() {
+  const products = await loadProducts();
+  const groups = groupsOf(products);
   return (
     <>
       <CatalogueBrowser products={products} groups={groups} />

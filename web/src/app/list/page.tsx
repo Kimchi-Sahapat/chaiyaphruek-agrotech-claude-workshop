@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useCart } from "@/components/CartContext";
-import { getByCode } from "@/lib/products";
+import { useProducts } from "@/components/ProductsContext";
 
 export default function ListPage() {
   const { cart, ready, inc, dec, remove, count } = useCart();
+  const { byCode } = useProducts();
   const lines = Object.keys(cart)
-    .map((code) => ({ p: getByCode(code), q: cart[code] }))
+    .map((code) => ({ p: byCode[code], q: cart[code] }))
     .filter((x) => x.p && x.q > 0);
 
   return (
