@@ -9,6 +9,7 @@ import {
   SAMPLE_SOTUS_TOTAL,
   SOTUS_STEP,
   PRIVILEGES,
+  FLASH_SALES,
   baht,
   nextTier,
 } from "@/content/loyalty";
@@ -116,7 +117,27 @@ export default function ProfilePage() {
         <ProgressBar pct={sotusPct} />
       </div>
 
-      {/* Privileges */}
+      {/* Flash Sale — the signature moment */}
+      <div className="flash-title">
+        <span className="bolt">⚡</span> FLASH SALE
+        <span className="flash-sub">ดีลลดแรง เฉพาะสมาชิก</span>
+      </div>
+      <div className="flash-grid">
+        {FLASH_SALES.map((f) => (
+          <div className="flash" key={f.product}>
+            <div className="flash-burst">
+              <span className="fb-off">ลด</span>
+              <span className="fb-pct">{f.off}</span>
+            </div>
+            <div className="flash-info">
+              <div className="fs-name">{f.product}</div>
+              <div className="fs-cond">{f.condition}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Other privileges */}
       <div className="camp-sec plain">✨ สิทธิพิเศษสมาชิก</div>
       {PRIVILEGES.map((p) => (
         <div className="card priv" key={p.title}>

@@ -100,14 +100,6 @@ export default function ConfirmPage() {
         {ok ? "" : "กรอกเบอร์โทรก่อน ถึงจะส่งรายการได้ครับ"}
       </p>
 
-      <div className="or-line">— หรือ —</div>
-      <a className="bigbtn b-call" href={`tel:${SHOP.tel}`}>
-        📞 โทรสั่ง {SHOP.telDisplay}
-      </a>
-      <p className="hint">
-        โทรสั่งจะเป็นการโทรหาร้านโดยตรง (ไม่ได้ส่งรายการอัตโนมัติ) — อ่านรายการด้านบนให้ทางร้านได้เลยครับ
-      </p>
-
       <p className="hint">
         แตะ “ส่งรายการทางไลน์” แล้วกดส่งในแอปไลน์ ทางร้านจะแจ้งราคาและของพร้อมส่งให้ครับ
         <br />

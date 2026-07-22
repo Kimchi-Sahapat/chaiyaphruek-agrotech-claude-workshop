@@ -35,17 +35,23 @@ export const SAMPLE_SOTUS_TOTAL = 620000;
 
 export const SOTUS_STEP = 1000000; // ทุก 1 ล้าน = 1 สิทธิ์ลุ้น Toyota Hilux Champ
 
+export type FlashSale = { off: string; product: string; condition: string };
+
+// 2 flash-sale deals
+export const FLASH_SALES: FlashSale[] = [
+  { off: "90%", product: "อโทนิค", condition: "ซื้อ 1 ขวด" },
+  {
+    off: "30%",
+    product: "โรดัลโก้",
+    condition: "ซื้อคู่กับสินค้าลัคกี้ อะโกรเทค ตัวไหนก็ได้",
+  },
+];
+
 export const PRIVILEGES = [
   {
     icon: "🎟️",
     title: "สิทธิ์แลกซื้อพิเศษ",
     detail: "เช่น โตกุไธออน ซื้อ 10 แถม 2",
-  },
-  {
-    icon: "⚡",
-    title: "Flash Sale",
-    detail:
-      "เช่น อโทนิค 1 ขวด ลด 90% · ซื้อโรดัลโก้คู่กับสินค้าลัคกี้ อะโกรเทคตัวไหนก็ได้ ลด 30%",
   },
   {
     icon: "🎁",

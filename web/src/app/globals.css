@@ -946,3 +946,110 @@ h2.t {
   font-size: 13.5px;
   line-height: 1.5;
 }
+
+/* ── Flash Sale (signature) ───────────────────────── */
+.flash-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--red);
+  margin: 22px 2px 12px;
+  letter-spacing: 0.02em;
+}
+.flash-title .bolt {
+  font-size: 18px;
+}
+.flash-title .flash-sub {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.flash-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.flash {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  overflow: hidden;
+  border-radius: 18px;
+  padding: 16px 16px 16px 14px;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  background: radial-gradient(
+      120% 140% at 100% 0%,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0) 45%
+    ),
+    linear-gradient(150deg, #4db748, #1e7b34);
+  box-shadow: 0 8px 20px rgba(30, 123, 52, 0.28);
+}
+/* subtle brand sunburst rays */
+.flash::before {
+  content: "";
+  position: absolute;
+  left: -34px;
+  top: -34px;
+  width: 156px;
+  height: 156px;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.1) 0 8deg,
+    transparent 8deg 20deg
+  );
+  border-radius: 50%;
+  pointer-events: none;
+}
+.flash-burst {
+  position: relative;
+  flex: 0 0 auto;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 40% 35%, #ffe985, #ffd700 60%, #e9b500);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+.flash-burst .fb-off {
+  font-size: 13px;
+  font-weight: 800;
+  color: #8a1a1f;
+  line-height: 1;
+  margin-bottom: -1px;
+}
+.flash-burst .fb-pct {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+}
+.flash-info {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+.flash-info .fs-name {
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.flash-info .fs-cond {
+  font-size: 13px;
+  margin-top: 5px;
+  color: var(--cream);
+  font-weight: 600;
+  line-height: 1.4;
+}
