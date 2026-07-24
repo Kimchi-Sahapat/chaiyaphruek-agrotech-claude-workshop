@@ -2,5 +2,7 @@
 .claude/logs/
 .superpowers/
 
+.worktrees/
+
 # web app lives in its own repo (chaiyapreuk-agrotech-web)
 web/
