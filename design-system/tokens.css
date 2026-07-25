@@ -1,0 +1,97 @@
+/* ============================================================
+   ชัยพฤกษ์ อโกรเทค — Design Tokens (CSS custom properties)
+   Source of truth: design-system/tokens.json
+   Import once at the app root, then reference via var(--cyp-*).
+   ============================================================ */
+
+:root {
+  /* ---- Brand (primary) ---- */
+  --cyp-green:        #4DB748; /* Lime Green — dominant background, always */
+  --cyp-navy:         #1B3A8C; /* Deep Navy — "ชัยพฤกษ์", headlines, numbers */
+  --cyp-red:          #E8323C; /* Festival Red — "อโกรเทค", CTA, urgency */
+  --cyp-gold:         #FFD700; /* Harvest Gold — prize / single hero word */
+  --cyp-white:        #FFFFFF;
+
+  /* ---- Secondary ---- */
+  --cyp-green-dark:   #1E7B34; /* Forest Green — footers, borders */
+  --cyp-green-light:  #7DC75A; /* Ray Green — sunburst pattern */
+  --cyp-cream:        #FFFDE0; /* Soft Cream — panels, logo badge */
+
+  /* ---- Semantic roles ---- */
+  --cyp-bg:           var(--cyp-green);
+  --cyp-surface:      var(--cyp-cream);
+  --cyp-text:         var(--cyp-white);   /* text on green */
+  --cyp-headline:     var(--cyp-navy);
+  --cyp-cta:          var(--cyp-red);
+  --cyp-cta-text:     var(--cyp-white);
+  --cyp-highlight:    var(--cyp-gold);
+  --cyp-footer-bg:    var(--cyp-green-dark);
+
+  /* ---- Brand-name split (standalone text only) ---- */
+  --cyp-name-chaiyapreuk: var(--cyp-navy);
+  --cyp-name-agrotech:    var(--cyp-red);
+
+  /* ---- Typography ---- */
+  --cyp-font: "Kanit", "Noto Sans Thai", system-ui, sans-serif;
+  --cyp-fw-regular:   400;
+  --cyp-fw-medium:    500;
+  --cyp-fw-bold:      700;
+  --cyp-fw-extrabold: 800;
+  --cyp-lh-headline:  1.15;
+  --cyp-lh-body:      1.4;
+
+  /* UI type scale (web/app) */
+  --cyp-text-xs:   0.75rem;
+  --cyp-text-sm:   0.875rem;
+  --cyp-text-base: 1rem;
+  --cyp-text-lg:   1.25rem;
+  --cyp-text-xl:   1.5rem;
+  --cyp-text-2xl:  2rem;
+  --cyp-text-3xl:  2.5rem;
+  --cyp-text-hero: 3.5rem;
+
+  /* ---- Spacing ---- */
+  --cyp-space-1: 0.25rem;
+  --cyp-space-2: 0.5rem;
+  --cyp-space-3: 0.75rem;
+  --cyp-space-4: 1rem;
+  --cyp-space-6: 1.5rem;
+  --cyp-space-8: 2rem;
+  --cyp-space-12: 3rem;
+  --cyp-space-16: 4rem;
+
+  /* ---- Radius (never sharp corners on badges) ---- */
+  --cyp-radius-sm:   8px;
+  --cyp-radius-md:   16px;
+  --cyp-radius-lg:   24px;
+  --cyp-radius-pill: 999px;
+
+  /* ---- Effects ---- */
+  --cyp-shadow-float: 0 8px 24px rgba(27, 58, 140, 0.25);
+  --cyp-gradient-banner: linear-gradient(90deg, #4DB748 0%, #7DC75A 100%);
+}
+
+/* ---- Helper classes (optional, framework-free) ---- */
+
+/* Standalone brand name — always two colors. Usage:
+   <span class="cyp-brand"><b>ชัยพฤกษ์</b> <b>อโกรเทค</b></span> */
+.cyp-brand { font-family: var(--cyp-font); font-weight: var(--cyp-fw-extrabold); }
+.cyp-brand > :first-child { color: var(--cyp-name-chaiyapreuk); }
+.cyp-brand > :last-child  { color: var(--cyp-name-agrotech); }
+
+.cyp-cta {
+  background: var(--cyp-cta);
+  color: var(--cyp-cta-text);
+  font-family: var(--cyp-font);
+  font-weight: var(--cyp-fw-bold);
+  border: 0;
+  border-radius: var(--cyp-radius-pill);
+  padding: var(--cyp-space-3) var(--cyp-space-6);
+  cursor: pointer;
+}
+
+.cyp-footer {
+  background: var(--cyp-footer-bg);
+  color: var(--cyp-white);
+  font-family: var(--cyp-font);
+}

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "line-bot": {
+      "command": "node",
+      "args": ["scripts/line-mcp-launch.mjs"],
+      "env": {
+        "NPM_CONFIG_IGNORE_SCRIPTS": "true"
+      }
+    }
+  }
+}

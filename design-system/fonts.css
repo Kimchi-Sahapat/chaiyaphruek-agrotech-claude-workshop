@@ -1,0 +1,22 @@
+/* ============================================================
+   ชัยพฤกษ์ อโกรเทค — Fonts
+   Kanit (primary) + Noto Sans Thai (fallback), both Google Fonts.
+   Weights loaded: 400 / 500 / 700 / 800 (regular→extrabold).
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700;800&family=Noto+Sans+Thai:wght@400;500;700;800&display=swap");
+
+/* Apply globally */
+:root { --cyp-font: "Kanit", "Noto Sans Thai", system-ui, sans-serif; }
+
+html, body {
+  font-family: var(--cyp-font);
+  font-weight: 400;
+}
+
+/*
+  For best performance in a build pipeline, self-host instead of @import:
+    - Download Kanit + Noto Sans Thai from fonts.google.com
+    - Serve locally and replace the @import with @font-face rules.
+  NEVER use: serif, script, or low-legibility fonts.
+*/
