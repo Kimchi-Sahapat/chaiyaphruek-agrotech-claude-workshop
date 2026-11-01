@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: capcut-storyboard-pesticide-explainer
+expected_outcome: |
+  A storyboard table (time, visual, on-screen text, motion, SFX, VO) following the explainer spine, with PPE in every spraying visual, the label-warning line at the end, no invented rates or products, and a motion spec (easing/durations/safe box) the team can apply in CapCut. No MP4 render.

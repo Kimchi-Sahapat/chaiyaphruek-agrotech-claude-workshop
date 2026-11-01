@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: promo-without-facts-uses-placeholders
+expected_outcome: |
+  The skill picks the celebrate-mode promo format but does not invent the discount, dates, products or conditions: it uses [[placeholders]] (or asks) for them, avoids superlatives and safety claims, and tells the user what is still missing.

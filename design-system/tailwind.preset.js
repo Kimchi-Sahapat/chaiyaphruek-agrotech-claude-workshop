@@ -62,6 +62,15 @@ module.exports = {
       backgroundImage: {
         "banner-gradient": "linear-gradient(90deg, #4DB748 0%, #7DC75A 100%)",
       },
+      // brand motion (ease-brand-enter, duration-base …) — see tokens.json › motion
+      transitionTimingFunction: {
+        "brand-enter": "cubic-bezier(0.05, 0.7, 0.1, 1)",
+        "brand-info": "cubic-bezier(0, 0, 0.38, 0.9)",
+        "brand-exit": "cubic-bezier(0.3, 0, 0.8, 0.15)",
+        "brand-move": "cubic-bezier(0.2, 0, 0, 1)",
+        "brand-pop": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      },
+      transitionDuration: { snap: "100ms", quick: "200ms", base: "400ms", slow: "700ms", hero: "1000ms" },
     },
   },
 };

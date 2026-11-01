@@ -185,8 +185,9 @@ Syngenta, BASF, BAYER, UPL, ICP, AP-BIOTECH, RISINGSUN, J.A.M. TROP, C.A.AGRO, C
 | 6 | **Promotions** — ขับเคลื่อนด้วย CRM tag | รอ CRM demo |
 | 7 | **Design Book / CI** — `design.md` | รอ artwork จากผู้ใช้ |
 | 8 | **Lucky Agrotech** — Drive master folder + base price model | Phase 3–5 ค้าง |
+| 9 | **Motion Graphics** — kinetic type / motion graphic / explainer สำหรับ Reels·TikTok·LINE; skill `motion-graphics` + kit render MP4 ([motion/README.md](../motion/README.md), research ใน `motion/research/`) | ตั้งโปรเจกต์แล้ว (พ.ย. 2569) — รอโลโก้ทางการ + ยืนยัน motion CI proposals |
 
-**Tech stack:** CRM = Flask (Python + HTML) · Catalogue = Claude Code build ดึงจาก Excel · Website = ยังไม่เลือก stack
+**Tech stack:** CRM = Flask (Python + HTML) · Catalogue = Claude Code build ดึงจาก Excel · Website = ยังไม่เลือก stack · Motion = HTML/CSS + Web Animations → Playwright + ffmpeg (ไม่มี license fee; Remotion ต้องซื้อ license เพราะทีม > 3 คน)
 **หลักการ:** โปรเจกต์ในอนาคตควรอยู่โดเมนเดียวกันเพื่อสะสม SEO authority
 
 ---

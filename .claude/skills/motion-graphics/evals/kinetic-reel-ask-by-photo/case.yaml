@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: kinetic-reel-ask-by-photo
+expected_outcome: |
+  A new composition under motion/videos/ built with the motion kit, rendered to MP4 at 1080x1920 30fps, with lint showing 0 errors, an end card carrying exactly one CTA and the NAP from CLAUDE.md, and no invented product facts.
