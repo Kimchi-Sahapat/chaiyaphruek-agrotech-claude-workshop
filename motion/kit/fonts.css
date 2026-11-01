@@ -1,0 +1,11 @@
+/* ============================================================
+   Kanit — vendored locally so renders are deterministic & offline.
+   Source: github.com/google/fonts (ofl/kanit) · © The Kanit Project
+   Authors (Cadson Demak) · SIL Open Font License 1.1 → see fonts/OFL.txt
+   Weights: 400 / 500 / 700 / 800 (matches design-system tokens).
+   font-display:block → never render a fallback-font frame into a video.
+   ============================================================ */
+@font-face { font-family: "Kanit"; font-weight: 400; font-style: normal; font-display: block; src: url("fonts/Kanit-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Kanit"; font-weight: 500; font-style: normal; font-display: block; src: url("fonts/Kanit-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Kanit"; font-weight: 700; font-style: normal; font-display: block; src: url("fonts/Kanit-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Kanit"; font-weight: 800; font-style: normal; font-display: block; src: url("fonts/Kanit-ExtraBold.ttf") format("truetype"); }

@@ -6,3 +6,6 @@
 
 # web app lives in its own repo (chaiyapreuk-agrotech-web)
 web/
+
+# motion renders (MP4 / stills / contact sheets) — regenerate with motion/render/render.mjs
+motion/out/

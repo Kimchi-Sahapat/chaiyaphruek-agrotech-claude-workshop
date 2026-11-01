@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ถามก่อนแนะนำ — Kinetic Typography (Reel 9:16)</title>
+<!--
+  Piece:    "ไม่รู้ชื่อสินค้าก็ถามได้" — kinetic typography, brand USP (advisory)
+  Channel:  Facebook Reels + TikTok (1080×1920, 30fps) — boost-safe text box
+  Mode:     advise (calm body) · celebrate end card
+  Weights:  800 + 700 only (CI: max 2 per piece)
+  Facts:    only from .claude/CLAUDE.md (วิธีขายของร้าน, USP, NAP) — no product claims
+  Render:   node motion/render/render.mjs motion/videos/2026-11-ask-first/index.html
+-->
+<link rel="stylesheet" href="../../kit/cyp-motion.css">
+<style>
+  .hdr { position: absolute; top: 284px; left: 0; right: 0; display: flex; justify-content: center; }
+  .hdr .cyp-pill { font-size: 44px; }
+  .hdr .cyp-logo { width: 88px; height: 88px; }
+  .t700 { font-weight: 700; }
+  .body { top: 420px; }                     /* below the header pill, still inside the safe box */
+  #s1 .q { font-size: 92px; line-height: 1.3; }
+  #s1 .a { font-size: 188px; margin-top: 14px; }
+  #s2 .title { font-size: 88px; }
+  .list { margin-top: 48px; display: flex; flex-direction: column; gap: 30px; align-self: stretch; }
+  .item { display: flex; align-items: center; gap: 26px; padding: 24px 34px; font-size: 66px; text-align: left; }
+  .item .cyp-num { font-size: 62px; }
+  #s3 .l1 { font-size: 92px; }
+  #s3 .l2 { font-size: 120px; margin-top: 6px; }
+  .years { margin-top: 60px; display: inline-flex; align-items: center; gap: 26px; padding: 26px 44px; }
+  .years b { font-size: 124px; font-weight: 800; color: var(--cyp-red); line-height: 1; font-variant-numeric: tabular-nums; min-width: 2.2em; text-align: right; }
+  .years span { font-size: 50px; line-height: 1.3; text-align: left; }
+  #s4 .cyp-safe-916 { justify-content: flex-start; }
+  #s4 .cyp-logo { width: 260px; height: 260px; }
+  #s4 .name { font-size: 80px; margin-top: 26px; }
+  #s4 .tag { font-size: 44px; }
+  #s4 .cyp-cta { margin-top: 36px; font-size: 62px; }
+  #s4 .hint { font-size: 42px; margin-top: 18px; }
+  #s4 .nap { margin-top: 26px; padding: 22px 36px; font-size: 42px; line-height: 1.45; }
+</style>
+</head>
+<body>
+<main id="stage" class="cyp-stage cyp-bg-calm" data-width="1080" data-height="1920" data-fps="30" data-duration="19.4" data-mode="advise">
+
+  <!-- ambient background: sunburst (fades in for the end card) + ground motif (decor, UI zone) -->
+  <div class="cyp-fill"><div class="cyp-sunburst" id="rays"></div></div>
+  <div class="cyp-ground" id="ground"></div>
+
+  <!-- header strip: logo + split-colour brand name (CI: always present, top-centre) -->
+  <div class="hdr">
+    <div class="cyp-pill" id="pill"><div class="cyp-logo"></div><span class="cyp-brandname"><span>ชัยพฤกษ์</span> <span>อโกรเทค</span></span></div>
+  </div>
+
+  <!-- S1 hook: the viewer's pain as a question, the answer as the gold word -->
+  <section id="s1"><div class="cyp-safe-916 body">
+    <div class="q t700" id="s1q">ไม่รู้ชื่อ|สินค้า|ใช่ไหม?</div>
+    <div class="a cyp-hero cyp-navy cyp-stroke" id="s1a" data-key><span>ก็</span><span class="cyp-highlight" id="s1hl">ถามได้</span></div>
+  </div></section>
+
+  <!-- S2 the three questions (from "วิธีขายของร้าน — ถามก่อนแนะนำ") -->
+  <section id="s2"><div class="cyp-safe-916 body">
+    <div class="title t700" id="s2t">แค่บอกเรา <span class="cyp-gold">3</span> อย่าง</div>
+    <div class="list t700" id="s2l">
+      <div class="item cyp-panel"><span class="cyp-num">1</span><span>ปลูกพืชอะไร</span></div>
+      <div class="item cyp-panel"><span class="cyp-num">2</span><span>ต้นอยู่ระยะไหน</span></div>
+      <div class="item cyp-panel"><span class="cyp-num">3</span><span>เจออาการแบบไหน</span></div>
+    </div>
+  </div></section>
+
+  <!-- S3 the promise + heritage proof (USP 1 + 2) -->
+  <section id="s3"><div class="cyp-safe-916 body">
+    <div class="l1 t700" id="s3a">ทีมงานถามก่อน</div>
+    <div class="l2 cyp-hero cyp-navy cyp-stroke" id="s3b" data-key>แล้วค่อย|แนะนำ</div>
+    <div class="years cyp-panel t700" id="s3y"><b id="n50">50+</b><span>ปี ที่อยู่กับ<br>ชาวสวนจันทบุรี</span></div>
+  </div></section>
+
+  <!-- S4 end card: logo + split name + ONE CTA + NAP (inside the safe box) -->
+  <section id="s4"><div class="cyp-safe-916 t700">
+    <div class="cyp-logo" id="bigLogo"></div>
+    <div class="name cyp-brandname cyp-stroke" id="name"><span>ชัยพฤกษ์</span> <span>อโกรเทค</span></div>
+    <div class="tag" id="tag">นึกถึงปุ๋ยยา นึกถึงเครือชัยพฤกษ์</div>
+    <div class="cyp-cta" id="cta" data-key>ทักไลน์ @cyp-agro</div>
+    <div class="hint" id="hint">ส่งรูปฉลากมาเช็กสต็อกได้เลย</div>
+    <div class="nap cyp-panel" id="nap" data-lint-hold="skip">โทร 039-443-372 | 092-656-2944<br>สี่แยกขลุง · จ.–ส. 07:00–17:00 น.</div>
+  </div></section>
+</main>
+
+<script src="../../assets/brand/logo.js"></script>
+<script src="../../kit/cyp-motion.js"></script>
+<script>
+  const M = CYP.motion();
+
+  // header pill — brand cue inside the first second; leaves before the end card
+  M.in('#pill', 'drop', 0.1).out('#pill', 'lift', 14.1);
+  M.in('#rays', 'fade', 14.3, { dur: 0.8 }).loop('#rays', 'spin', 0);
+  M.in('#ground', 'wipe-up', 0, { dur: 0.8 });
+
+  // S1 hook 0–4.4 · poster frame (t = 1.0 s, LINE thumbnail) already shows question + answer
+  const s1 = M.scene('#s1', 0, 4.4);
+  s1.in('#s1q', 'rise', 0.15, { split: 'chunk', stagger: 0.12 })
+    .in('#s1a', 'punch', 0.55, { split: true, stagger: 0.16, sfx: 'pop' })
+    .in('#s1hl', 'highlight', 1.0, { sfx: 'ding', gain: 0.5 })
+    .out('#s1q', 'sink', 4.0).out('#s1a', 'sink', 4.1);
+
+  // S2 the three questions 4.4–9.4
+  const s2 = M.scene('#s2', 4.4, 9.4);
+  s2.in('#s2t', 'rise', 0.2, { split: 'chunk' })
+    .in('#s2l .item', 'slide-l', 0.8, { stagger: 0.55 })
+    .in('#s2l .cyp-num', 'pop', 0.95, { stagger: 0.55, sfx: 'pop' })
+    .out('#s2t', 'fade', 4.55).out('#s2l .item', 'sink', 4.5, { stagger: 0.06 });
+
+  // S3 the promise 9.4–14.4
+  const s3 = M.scene('#s3', 9.4, 14.4);
+  s3.in('#s3a', 'rise', 0.2)
+    .in('#s3b', 'mask-rise', 0.55, { split: 'chunk', stagger: 0.16 })
+    .in('#s3y', 'zoom', 1.3).count('#n50', 1.3, { from: 0, to: 50, dur: 1.1, suffix: '+' })
+    .sfx('tick', 1.45).sfx('tick', 1.75).sfx('ding', 2.4, 0.45)
+    .out('#s3a', 'fade', 4.6).out('#s3b', 'mask-up', 4.55).out('#s3y', 'fade', 4.6);
+
+  // S4 end card 14.4–19.4 (5 s: logo + split name + ONE CTA + NAP)
+  M.cut(14.4, 'burst');
+  const s4 = M.scene('#s4', 14.4, 19.4);
+  s4.in('#bigLogo', 'zoom', 0.2, { dur: 0.6, sfx: 'ding', gain: 0.6 })
+    .in('#name', 'rise', 0.5)
+    .in('#tag', 'fade', 0.8)
+    .in('#cta', 'pop', 1.05, { sfx: 'pop' }).loop('#cta', 'pulse', 1.8)
+    .in('#hint', 'fade', 1.3)
+    .in('#nap', 'rise', 1.45);
+
+  M.done();
+</script>
+</body>
+</html>

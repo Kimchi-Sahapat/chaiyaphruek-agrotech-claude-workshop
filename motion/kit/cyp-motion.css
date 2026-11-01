@@ -1,0 +1,204 @@
+/* ============================================================
+   ชัยพฤกษ์ อโกรเทค — Motion Kit styles
+   Brand colours/type come from the design system (single source of truth).
+   This file adds: video timing tokens, stage, Thai-safe text helpers and the
+   signature brand components (sunburst, ribbon, numbered circle, pill badge,
+   highlight, end card). Rules: ../../design.md · motion rules: ../README.md
+   ============================================================ */
+@import url("./fonts.css");
+@import url("../../design-system/tokens.css");
+
+:root {
+  /* ---- Video timing @30fps (1 frame = 33.3ms). Seconds in JS, ms here ---- */
+  --cyp-t-snap: 200ms;   /*  6f — sparkles, tiny accents            */
+  --cyp-t-quick: 330ms;  /* 10f — festive chunk entrances, exits    */
+  --cyp-t-base: 500ms;   /* 15f — standard entrance                 */
+  --cyp-t-slow: 700ms;   /* 21f — calm/advisor reveals, panels       */
+  --cyp-t-hero: 1000ms;  /* 30f — logo + end-card build              */
+
+  /* Thai-safe mask padding (measured on Kanit ExtraBold: stacked upper
+     marks reach 1.06em above baseline, lower marks 0.38em below). */
+  --cyp-mask-top: 0.3em;
+  --cyp-mask-bottom: 0.3em;
+
+  /* White outline on big navy/red text: ≤ 0.16em (visible width = half) */
+  --cyp-stroke: 0.12em;
+}
+
+/* ---------- page + stage ---------- */
+html, body { margin: 0; padding: 0; }
+body { background: #8a8f87; font-family: var(--cyp-font); }       /* preview chrome only — never inside the stage */
+body.cyp-render { background: transparent; overflow: hidden; }
+
+.cyp-stage {
+  position: relative; overflow: hidden;
+  width: 1080px; height: 1920px;                                    /* overridden by data-width/height */
+  background: var(--cyp-green);
+  color: var(--cyp-white);
+  font-family: var(--cyp-font); font-weight: 400;
+  -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+  transform-origin: 0 0;
+}
+.cyp-scene, .cyp-fill { position: absolute; inset: 0; }
+/* calm background: soft light-green glow on brand green (palette colours only) */
+.cyp-bg-calm { background: radial-gradient(circle at 50% 40%, rgba(125, 199, 90, .6) 0%, rgba(125, 199, 90, 0) 62%), var(--cyp-green); }
+/* text-safe box for 9:16 = x 120–960, y 270–1250 (+10px air). Everything that must be read lives inside. */
+.cyp-safe-916 { position: absolute; left: 130px; right: 130px; top: 290px; bottom: 690px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.cyp-center { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+
+/* ---------- type ---------- */
+.cyp-hero    { font-weight: 800; font-size: 124px; line-height: 1.2; letter-spacing: 0; }
+.cyp-display { font-weight: 800; font-size: 168px; line-height: 1.15; }
+.cyp-sub     { font-weight: 700; font-size: 64px;  line-height: 1.25; }
+.cyp-body    { font-weight: 400; font-size: 44px;  line-height: 1.4; }
+.cyp-small   { font-weight: 400; font-size: 34px;  line-height: 1.4; }
+.cyp-line    { display: block; }
+.cyp-navy  { color: var(--cyp-navy); }
+.cyp-red   { color: var(--cyp-red); }
+.cyp-gold  { color: var(--cyp-gold); }
+.cyp-white { color: var(--cyp-white); }
+.cyp-cream { color: var(--cyp-cream); }
+/* paint-order keeps the fill on top — plain -webkit-text-stroke eats Thai glyphs */
+.cyp-stroke { -webkit-text-stroke: var(--cyp-stroke) var(--cyp-white); paint-order: stroke fill; }
+.cyp-stroke-navy { -webkit-text-stroke: var(--cyp-stroke) var(--cyp-navy); paint-order: stroke fill; }
+.cyp-shadow { text-shadow: 0 6px 0 rgba(30, 123, 52, .55); }
+
+/* standalone brand name: ชัยพฤกษ์ navy + อโกรเทค red (never one colour) */
+.cyp-brandname { font-weight: 800; white-space: nowrap; }
+.cyp-brandname > :first-child { color: var(--cyp-navy); }
+.cyp-brandname > :last-child  { color: var(--cyp-red); }
+
+/* split chunks + Thai-safe masks (padding stops tone marks/vowels being clipped) */
+.c { display: inline-block; white-space: nowrap; }
+.cyp-mask {
+  display: inline-block; overflow: hidden; vertical-align: top;
+  padding: var(--cyp-mask-top) .08em var(--cyp-mask-bottom);
+  margin: calc(-1 * var(--cyp-mask-top)) -.08em calc(-1 * var(--cyp-mask-bottom));
+}
+.cyp-mask > .c { display: inline-block; }
+
+/* ---------- brand components ---------- */
+
+/* sunburst rays — light green on green (promo / event / end card). Put it in a
+   .cyp-fill parent; the kit rotates it slowly with loop('spin'). */
+.cyp-sunburst {
+  position: absolute; left: 50%; top: 50%;
+  width: 2800px; height: 2800px; margin: -1400px 0 0 -1400px;
+  background: repeating-conic-gradient(from 0deg, var(--cyp-green-light) 0deg 7deg, transparent 7deg 18deg);
+  -webkit-mask-image: radial-gradient(circle at center, #000 0%, #000 22%, transparent 62%);
+          mask-image: radial-gradient(circle at center, #000 0%, #000 22%, transparent 62%);
+  opacity: .55;
+}
+
+/* white pill badge: logo + brand name (header strip of every piece) */
+.cyp-pill {
+  display: inline-flex; align-items: center; gap: 18px;
+  background: var(--cyp-white); border-radius: var(--cyp-radius-pill);
+  padding: 12px 34px 12px 12px; box-shadow: var(--cyp-shadow-float);
+  font-size: 44px;
+}
+.cyp-pill img, .cyp-pill svg { width: 92px; height: 92px; display: block; }
+/* logo slot — size the div, the artwork fills it (uniform scale only: never stretch/recolour/rotate) */
+.cyp-logo { flex: none; }
+.cyp-logo > svg, .cyp-logo > img { width: 100%; height: 100%; display: block; object-fit: contain; }
+
+/* "ground" — land motif from the logo (gold mound / green land) to anchor the bottom of 9:16
+   frames. Decoration only: it lives in the UI-covered zone, never put text on it. */
+.cyp-ground { position: absolute; left: -15%; right: -15%; bottom: -330px; height: 700px; border-radius: 50% 50% 0 0 / 100% 100% 0 0; background: var(--cyp-green-light); opacity: .5; }
+.cyp-ground::after { content: ""; position: absolute; left: 35%; right: -25%; bottom: 120px; height: 520px; border-radius: 50% 50% 0 0 / 100% 100% 0 0; background: var(--cyp-green-dark); opacity: .28; }
+
+/* red ribbon banner — white text on red, notched ends */
+.cyp-ribbon {
+  display: inline-block; position: relative;
+  background: var(--cyp-red); color: var(--cyp-white);
+  font-weight: 800; padding: 18px 92px 22px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 48px) 50%, 100% 100%, 0 100%, 48px 50%);
+  filter: drop-shadow(0 8px 0 rgba(0, 0, 0, .12));
+}
+
+/* numbered red circle — white number (activity / step lists) */
+.cyp-num {
+  display: inline-grid; place-items: center; flex: none;
+  width: 1.55em; height: 1.55em; border-radius: 50%;
+  background: var(--cyp-red); color: var(--cyp-white);
+  font-weight: 800; line-height: 1; border: .09em solid var(--cyp-white);
+  box-shadow: var(--cyp-shadow-float);
+}
+
+/* panels (rounded — never sharp corners) */
+.cyp-panel      { background: var(--cyp-cream); color: var(--cyp-navy); border-radius: var(--cyp-radius-lg); box-shadow: var(--cyp-shadow-float); }
+.cyp-panel-dark { background: rgba(30, 123, 52, .86); color: var(--cyp-white); border-radius: var(--cyp-radius-lg); }
+
+/* gold highlight bar behind ONE key word (animate with in('highlight')) */
+.cyp-highlight { position: relative; display: inline-block; z-index: 0; color: var(--cyp-navy); }
+.cyp-highlight::before {
+  content: ""; position: absolute; z-index: -1;
+  left: -.12em; right: -.12em; top: .12em; bottom: .04em;
+  background: var(--cyp-gold); border-radius: .18em;
+  transform-origin: 0 50%;
+}
+/* underline that draws left→right (animate with in('underline')) */
+.cyp-underline { position: relative; display: inline-block; }
+.cyp-underline::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -.02em; height: .12em;
+  background: var(--cyp-red); border-radius: 999px; transform-origin: 0 50%;
+}
+
+/* CTA — red pill, white bold text (one CTA per piece) */
+.cyp-cta {
+  display: inline-flex; align-items: center; gap: 16px;
+  background: var(--cyp-red); color: var(--cyp-white);
+  border-radius: var(--cyp-radius-pill); padding: 22px 54px 26px;
+  font-weight: 700; font-size: 56px; box-shadow: var(--cyp-shadow-float);
+  white-space: nowrap;                       /* never break "@cyp-agro" or a phone number */
+}
+.cyp-nowrap { white-space: nowrap; }
+
+/* 4-point sparkle (promo energy only) */
+.cyp-sparkle {
+  position: absolute; width: 64px; height: 64px; background: var(--cyp-gold);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+
+/* floating product / prize image */
+.cyp-float { filter: drop-shadow(0 22px 26px rgba(27, 58, 140, .28)); }
+
+/* footer strip for SQUARE formats (1080×1080 / 1040×1040) — on 9:16 use the end card */
+.cyp-footer {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: var(--cyp-footer-bg); color: var(--cyp-white);
+  display: flex; align-items: center; justify-content: center; gap: 28px;
+  font-size: 30px; font-weight: 500; padding: 18px 24px;
+}
+
+/* photo plate — real farm / farmer photos (CI: no stock, no clipart) */
+.cyp-photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.cyp-photo-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,123,52,0) 35%, rgba(30,123,52,.85) 100%); }
+.cyp-placeholder {
+  display: grid; place-items: center; text-align: center;
+  background: repeating-linear-gradient(45deg, rgba(255,253,224,.95) 0 24px, rgba(255,253,224,.8) 24px 48px);
+  color: var(--cyp-green-dark); font-weight: inherit; font-size: 40px; border-radius: var(--cyp-radius-lg);
+  border: 4px dashed var(--cyp-green-dark);
+}
+
+/* ---------- scene transition overlays (kit builds these) ---------- */
+.cyp-cut { position: absolute; inset: 0; z-index: 900; pointer-events: none; visibility: hidden; }
+.cyp-cut--panel { background: var(--cyp-cream); }
+.cyp-cut--green { background: var(--cyp-green-light); }
+.cyp-cut--burst { background: var(--cyp-green-light); }
+
+/* ---------- preview chrome (hidden when rendering) ---------- */
+.cyp-viewport { position: relative; margin: 0 auto; }
+.cyp-player {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10000;
+  display: flex; align-items: center; gap: 12px; padding: 10px 16px;
+  background: rgba(20, 24, 20, .88); color: #fff; font: 14px/1.2 system-ui, sans-serif;
+}
+.cyp-player button { font: inherit; background: #4DB748; color: #fff; border: 0; border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+.cyp-player input[type=range] { flex: 1; accent-color: #4DB748; }
+.cyp-player .cyp-time { font-variant-numeric: tabular-nums; min-width: 190px; }
+.cyp-guides { position: absolute; inset: 0; z-index: 9999; pointer-events: none; display: none; }
+.cyp-guides.on { display: block; }
+.cyp-guides .zone { position: absolute; background: rgba(232, 50, 60, .28); outline: 2px dashed rgba(232, 50, 60, .9); }
+.cyp-guides .zone.soft { background: rgba(255, 215, 0, .20); outline-color: rgba(255, 170, 0, .9); }
+.cyp-guides .zone span { position: absolute; left: 8px; top: 6px; font: 600 22px/1.2 system-ui, sans-serif; color: #fff; text-shadow: 0 1px 2px #000; }

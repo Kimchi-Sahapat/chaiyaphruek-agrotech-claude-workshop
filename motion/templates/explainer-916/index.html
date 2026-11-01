@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>TEMPLATE — Explainer (Reel 9:16, advise, photo-real hybrid)</title>
+<!--
+  Copy this folder to motion/videos/<yyyy-mm-dd>-<slug>/ and replace every [[…]].
+  Spine: symptom (real photo) → why (pre-train the name) → ≤5 steps → when (stage) → recap → CTA.
+  EVERY symptom / cause / step / rate / timing must come from the label, DOA or a named source —
+  no source → keep the placeholder and tell the user. Rates appear as on-screen text from the label.
+  Photos: real Chanthaburi orchards/farmers → assets/*.jpg, set as background-image on .cyp-photo.
+  Pesticide topics keep the warning line in the recap (research/04 D1).
+  With voice-over: retime each `at` to the VO cue sheet (start time of each phrase).
+-->
+<link rel="stylesheet" href="../../kit/cyp-motion.css">
+<style>
+  .t700 { font-weight: 700; }
+  .hdr { position: absolute; top: 284px; left: 0; right: 0; display: flex; justify-content: center; z-index: 5; }
+  .hdr .cyp-pill { font-size: 44px; } .hdr .cyp-logo { width: 88px; height: 88px; }
+  .body { top: 420px; }
+  .photo-ph { position: absolute; inset: 0; border-radius: 0; border: 0; font-size: 40px; padding-bottom: 700px; }
+  .qpanel { padding: 34px 40px; font-size: 76px; line-height: 1.3; }
+  .tag-step { font-size: 46px; color: var(--cyp-gold); }
+  #s2 .term { font-size: 110px; }
+  #s2 .def { font-size: 52px; margin-top: 18px; padding: 22px 30px; line-height: 1.35; }
+  .diagram { margin-top: 34px; width: 640px; height: 340px; font-size: 38px; }
+  .step { display: flex; align-items: center; gap: 26px; padding: 26px 32px; font-size: 60px; text-align: left; align-self: stretch; }
+  .step .cyp-num { font-size: 60px; }
+  .counter { font-size: 48px; margin-bottom: 26px; }
+  .stage-row { display: flex; gap: 18px; margin-top: 40px; }
+  .chip { white-space: nowrap; padding: 14px 24px; border-radius: var(--cyp-radius-pill); background: rgba(255,253,224,.35); font-size: 44px; }
+  .chip.on { background: var(--cyp-cream); color: var(--cyp-navy); }
+  .recap { padding: 34px 40px; align-self: stretch; text-align: left; font-size: 54px; line-height: 1.45; }
+  .warn { margin-top: 26px; font-size: 40px; line-height: 1.4; padding: 18px 26px; }
+  #s6 .cyp-safe-916 { justify-content: flex-start; }
+  #s6 .cyp-logo { width: 260px; height: 260px; }
+  #s6 .name { font-size: 80px; margin-top: 40px; }
+  #s6 .cyp-cta { margin-top: 36px; font-size: 56px; }
+  #s6 .hint { font-size: 42px; margin-top: 18px; }
+  #s6 .nap { margin-top: 26px; padding: 22px 36px; font-size: 42px; line-height: 1.45; }
+</style>
+</head>
+<body>
+<main id="stage" class="cyp-stage cyp-bg-calm" data-width="1080" data-height="1920" data-fps="30" data-duration="40" data-mode="advise">
+  <div class="cyp-fill"><div class="cyp-sunburst" id="rays"></div></div>
+  <div class="cyp-ground" id="ground"></div>
+  <div class="hdr"><div class="cyp-pill" id="pill"><div class="cyp-logo"></div><span class="cyp-brandname"><span>ชัยพฤกษ์</span> <span>อโกรเทค</span></span></div></div>
+
+  <!-- S1 HOOK — the symptom farmers recognise, on a REAL photo -->
+  <section id="s1">
+    <div class="cyp-photo" id="photo1"><div class="cyp-placeholder photo-ph">[[ภาพจริง: อาการที่ชาวสวนเห็น — ถ่ายในสวนจันทบุรี]]</div></div>
+    <div class="cyp-photo-scrim"></div>
+    <div class="cyp-safe-916 body t700">
+      <div class="qpanel cyp-panel-dark" id="q" data-key>[[อาการ]] แบบนี้|เกิดจากอะไร?</div>
+    </div>
+  </section>
+
+  <!-- S2 WHY — pre-train the name, then the mechanism (label ON the object) -->
+  <section id="s2"><div class="cyp-safe-916 body t700">
+    <div class="tag-step" id="s2tag">ทำไมถึงเป็น</div>
+    <div class="term cyp-hero cyp-navy cyp-stroke" id="term">[[ชื่อเรียก]]</div>
+    <div class="def cyp-panel" id="def">[[อธิบาย 1 ประโยค — จากแหล่งข้อมูล]]</div>
+    <div class="diagram cyp-placeholder" id="diagram">[[แผนภาพ: ส่วนที่มองไม่เห็น + ป้ายบนวัตถุ]]</div>
+  </div></section>
+
+  <!-- S3 WHAT — one step per beat (shared axis: next step enters from the right) -->
+  <section id="s3"><div class="cyp-safe-916 body t700">
+    <div class="counter" id="counter">ทำอย่างไร · <span id="stepN">1</span>/3</div>
+    <div class="step cyp-panel" id="st1"><span class="cyp-num">1</span><span>[[ขั้นที่ 1]]</span></div>
+    <div class="step cyp-panel" id="st2" style="margin-top:26px"><span class="cyp-num">2</span><span>[[ขั้นที่ 2]]</span></div>
+    <div class="step cyp-panel" id="st3" style="margin-top:26px"><span class="cyp-num">3</span><span>[[ขั้นที่ 3]]</span></div>
+  </div></section>
+
+  <!-- S4 WHEN — farmers' own stage words, "you are here" -->
+  <section id="s4"><div class="cyp-safe-916 body t700">
+    <div class="tag-step" id="s4tag">ทำเมื่อไร</div>
+    <div class="cyp-sub" id="when" data-key>[[ระยะ / เดือน]]</div>
+    <div class="stage-row" id="stages"><span class="chip">[[ระยะก่อน]]</span><span class="chip on">[[ระยะนี้]]</span><span class="chip">[[ระยะถัดไป]]</span></div>
+  </div></section>
+
+  <!-- S5 RECAP — static card with the must-dos (+ pesticide warning) -->
+  <section id="s5"><div class="cyp-safe-916 body t700">
+    <div class="recap cyp-panel" id="recap" data-key>• [[ข้อสำคัญ 1]]<br>• [[ข้อสำคัญ 2]]<br>• [[ข้อสำคัญ 3]]</div>
+    <div class="warn cyp-panel-dark" id="warn">อ่านฉลากก่อนใช้ทุกครั้ง<br>ใช้ตามอัตราที่ฉลากระบุ<br>สวมอุปกรณ์ป้องกันขณะผสมและฉีดพ่น</div>
+  </div></section>
+
+  <!-- S6 END CARD — ONE CTA (photo to LINE) + NAP -->
+  <section id="s6"><div class="cyp-safe-916 t700">
+    <div class="cyp-logo" id="bigLogo"></div>
+    <div class="name cyp-brandname cyp-stroke" id="name"><span>ชัยพฤกษ์</span> <span>อโกรเทค</span></div>
+    <div class="cyp-cta" id="cta" data-key>ส่งรูปถาม ไลน์ @cyp-agro</div>
+    <div class="hint" id="hint">บอกพืช ระยะ และอาการ ทีมงานช่วยดูให้</div>
+    <div class="nap cyp-panel" id="nap" data-lint-hold="skip">โทร 039-443-372 | 092-656-2944<br>สี่แยกขลุง · จ.–ส. 07:00–17:00 น.</div>
+  </div></section>
+</main>
+<script src="../../assets/brand/logo.js"></script>
+<script src="../../kit/cyp-motion.js"></script>
+<script>
+  const M = CYP.motion();
+  M.in('#ground', 'wipe-up', 0, { dur: 0.7 });
+  M.in('#pill', 'drop', 0.1).out('#pill', 'lift', 34.6);
+  M.in('#rays', 'fade', 34.8, { dur: 0.8 }).loop('#rays', 'spin', 0);
+
+  const s1 = M.scene('#s1', 0, 6);                       // hook
+  s1.in('#photo1', 'zoom', 0, { dur: 1.2 })
+    .anim('#photo1', [{ transform: 'scale(1)' }, { transform: 'scale(1.04)' }], 1.2, { dur: 4.8, ease: 'linear', fill: 'forwards' })
+    .in('#q', 'rise', 0.4, { split: 'chunk' })
+    .out('#q', 'fade', 5.6);
+  M.cut(6, 'panel');
+
+  const s2 = M.scene('#s2', 6, 12.5);                    // why
+  s2.in('#s2tag', 'fade', 0.2).in('#term', 'punch', 0.4, { sfx: 'pop' })
+    .in('#def', 'rise', 1.0).in('#diagram', 'wipe', 1.6)
+    .out('#s2tag, #term, #def, #diagram', 'fade', 6.1);
+
+  const s3 = M.scene('#s3', 12.5, 22);                   // what — one step per beat
+  s3.in('#counter', 'fade', 0.1)
+    .in('#st1', 'slide-r', 0.3).in('#st1 .cyp-num', 'pop', 0.4, { sfx: 'pop' })
+    .in('#st2', 'slide-r', 2.9).in('#st2 .cyp-num', 'pop', 3.0, { sfx: 'pop' })
+    .in('#st3', 'slide-r', 5.5).in('#st3 .cyp-num', 'pop', 5.6, { sfx: 'pop' })
+    .tick((t) => { document.getElementById('stepN').textContent = t < 2.9 ? 1 : t < 5.5 ? 2 : 3; })
+    .out('#counter, #st1, #st2, #st3', 'fade', 9.1);
+
+  const s4 = M.scene('#s4', 22, 27);                     // when
+  s4.in('#s4tag', 'fade', 0.1).in('#when', 'rise', 0.3).in('#stages', 'rise', 0.6, { split: 'children', stagger: 0.12 })
+    .out('#s4tag, #when, #stages', 'fade', 4.6);
+
+  const s5 = M.scene('#s5', 27, 35);                     // recap (static once in)
+  s5.in('#recap', 'zoom', 0.1).in('#warn', 'fade', 0.5).out('#recap, #warn', 'fade', 7.6);
+
+  M.cut(35, 'burst');
+  const s6 = M.scene('#s6', 35, 40);                     // end card
+  s6.in('#bigLogo', 'zoom', 0.2, { dur: 0.6, sfx: 'ding', gain: 0.6 })
+    .in('#name', 'rise', 0.5).in('#cta', 'pop', 0.9, { sfx: 'pop' }).loop('#cta', 'pulse', 1.6)
+    .in('#hint', 'fade', 1.1).in('#nap', 'rise', 1.3);
+  M.done();
+</script>
+</body>
+</html>
